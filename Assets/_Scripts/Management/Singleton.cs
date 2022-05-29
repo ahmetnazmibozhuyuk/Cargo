@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Template.Managers
+namespace Cargo.Managers
 {
     public abstract class Singleton<T> : MonoBehaviour where T : Component
     {

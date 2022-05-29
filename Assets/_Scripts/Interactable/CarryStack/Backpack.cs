@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Template.Managers;
+using Cargo.Managers;
 using DG.Tweening;
 
-namespace Template.Interactable
+namespace Cargo.Interactable
 {
+
+    // interactable interface'ini ikiye bölebilirsin; collectable tarzı değiştir crashable interfacei getir
+
+
     public class Backpack : MonoBehaviour, IInteractable
     {
         public bool FullCapacity { get; set; }
@@ -28,6 +32,8 @@ namespace Template.Interactable
         private float _objectTransferSpeed = 0.15f;
 
         private bool _inTheZone;
+
+        private int _cargoGathered = 0;
 
         private void Awake()
         {
@@ -60,8 +66,6 @@ namespace Template.Interactable
                     backpackTransform.position.z), 2, 1, _objectTransferSpeed);
                 StartCoroutine(Co_CorrectCubePosition(givenObj, Counter));
                 Counter++;
-                //if (gathererType == GathererType.Player)
-                //    GameManager.instance.AddBoxToBackpack();
                 if (Counter >= backpackCapacity) FullCapacity = true;
             }
         }
@@ -84,10 +88,8 @@ namespace Template.Interactable
                 _animator.SetBool("IsCarrying", false);
             }
             FullCapacity = false;
-            //if (gathererType == GathererType.Player)
-            //    GameManager.instance.RemoveBoxFromBackpack();
 
-            var temp = _objectDataList[Counter].ObjectHeld;
+            GameObject temp = _objectDataList[Counter].ObjectHeld;
             temp.transform.SetParent(null);
             _objectDataList[Counter].ObjectHeld = null;
             return temp;
@@ -104,15 +106,7 @@ namespace Template.Interactable
                     StartCoroutine(Co_GetCubeFrom(interactable));
                     break;
                 case InteractableType.Stockpile:
-                    switch (gathererType)
-                    {
-                        case GathererType.Player:
-                            StartCoroutine(Co_GetCubeFrom(interactable));
-                            break;
-                        case GathererType.Helper:
-                            StartCoroutine(Co_SendCubeTo(interactable));
-                            break;
-                    }
+                    StartCoroutine(Co_SendCubeTo(interactable));
                     break;
                 case InteractableType.Unlockable:
                     StartCoroutine(Co_SendCubeTo(interactable));
@@ -127,8 +121,18 @@ namespace Template.Interactable
         {
             while (_inTheZone && !FullCapacity)
             {
-                TakeObject(interactable.GiveObject(), transform);
-                yield return new WaitForSeconds(gatherRate); //@todo: sürekli coroutine çağırma mümkünse mevcut çağrılan coroutine içinde devam et veya update içinde timerla hallet
+                if (_cargoGathered >= GameManager.instance.CargoCapacity)
+                {
+                    GameManager.instance.FullCapacity();
+                    yield break;
+                }
+                GameObject takenObject = interactable.GiveObject();
+                TakeObject(takenObject, transform);
+                if (takenObject != null)
+                    _cargoGathered++;
+                Debug.Log("cargo amount = " + _cargoGathered);
+                yield return new WaitForSeconds(gatherRate);
+
             }
             yield break;
         }
@@ -150,7 +154,7 @@ namespace Template.Interactable
         }
     }
 }
-namespace Template
+namespace Cargo
 {
     [System.Serializable]
     public class ObjectData
@@ -182,6 +186,6 @@ namespace Template
     }
     public enum GathererType
     {
-        Player = 0, Helper = 1
+        Player = 0, DeliveryPont = 1
     }
 }

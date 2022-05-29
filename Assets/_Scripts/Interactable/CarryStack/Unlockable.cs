@@ -3,16 +3,16 @@ using UnityEngine;
 using DG.Tweening;
 using TMPro;
 using ObjectPooling;
-using Template.Managers;
+using Cargo.Managers;
 
-namespace Template.Interactable
+namespace Cargo.Interactable
 {
     public class Unlockable : MonoBehaviour, IInteractable
     {
         public bool FullCapacity { get; set; }
         public InteractableType Type { get; set; }
 
-        [SerializeField] private List<GameObject> buildingToUnlock = new List<GameObject>();
+        //[SerializeField] private List<GameObject> buildingToUnlock = new List<GameObject>();
 
         [SerializeField] private TextMeshProUGUI unlockAmountText;
 

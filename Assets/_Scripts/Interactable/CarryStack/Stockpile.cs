@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using Template.Managers;
+using Cargo.Managers;
 
-namespace Template.Interactable
+namespace Cargo.Interactable
 {
     public class Stockpile : MonoBehaviour, IInteractable
     {
@@ -25,6 +25,8 @@ namespace Template.Interactable
         private void Start()
         {
             InitializePositions();
+
+            stockpileCapacity = GameManager.instance.CargoCapacity;
         }
         private void InitializePositions()
         {
@@ -54,11 +56,13 @@ namespace Template.Interactable
                 _objectDataList[_counter].ObjectHeld = givenObj;
                 givenObj.transform.rotation = Quaternion.Euler(0, 0, 0);
                 givenObj.transform.DOJump(_objectDataList[_counter].ObjectPosition, 2, 1, 0.1f);
+                givenObj.transform.SetParent(transform);
                 _counter++;
                 //GameManager.instance.AddBoxToStockpile();
                 if (_counter >= stockpileCapacity)
                 {
                     FullCapacity = true;
+                    GameManager.instance.TruckFullyLoaded();
                 }
             }
         }

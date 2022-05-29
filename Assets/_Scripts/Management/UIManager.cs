@@ -2,18 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Template.Managers
+namespace Cargo.Managers
 {
     public class UIManager : MonoBehaviour
     {
-
-
-
         public void GameAwaitingStart()
         {
 
         }
-        public void GameStarted()
+        public void StackState()
+        {
+
+        }
+        public void DriveState()
+        {
+
+        }
+        public void DeliverState()
         {
 
         }

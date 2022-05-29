@@ -1,14 +1,8 @@
 ﻿using UnityEngine;
 //using ObjectPooling;
 
-namespace Template.Managers
+namespace Cargo.Managers
 {
-
-    //yeni birşey eklemen gerektiğinde (mesela sabit duran kamyona controller vs
-    //dependency injection kullanmayı dene, düzgün instantiate veya addcomponent yap
-    //burada get; private set bir variable'a at ve o variable'da init methodunu kullan)
-
-
     [RequireComponent(typeof(UIManager), typeof(LevelManager))]
     public class GameManager : Singleton<GameManager>
     {
@@ -20,6 +14,8 @@ namespace Template.Managers
             set { player = value; }
         }
         [SerializeField] private GameObject player;
+
+        public int CargoCapacity { get; private set; }
 
 
         private UIManager _uiManager;
@@ -36,6 +32,7 @@ namespace Template.Managers
         {
             ChangeState(GameState.GameAwaitingStart);
         }
+        #region Game States
         public void ChangeState(GameState newState)
         {
             if (CurrentState == newState) return;
@@ -46,11 +43,14 @@ namespace Template.Managers
                 case GameState.GameAwaitingStart:
                     GameAwaitingStartState();
                     break;
-                case GameState.GameStarted:
-                    GameStartedState();
+                case GameState.StackState:
+                    StackState();
                     break;
-                case GameState.GameCheckingResults:
-                    GameCheckingResultsState();
+                case GameState.DriveState:
+                    DriveState();
+                    break;
+                case GameState.DeliverState:
+                    DeliverState();
                     break;
                 case GameState.GameWon:
                     GameWonState();
@@ -66,14 +66,19 @@ namespace Template.Managers
         {
             _uiManager.GameAwaitingStart();
         }
-        private void GameStartedState()
+        private void StackState()
         {
-            _uiManager.GameStarted();
+            _uiManager.StackState();
         }
-        private void GameCheckingResultsState()
+        private void DriveState()
         {
+            _uiManager.DriveState();
+        }
+        private void DeliverState()
+        {
+            _uiManager.DeliverState();
+        }
 
-        }
         private void GameWonState()
         {
             _uiManager.GameWon();
@@ -83,18 +88,30 @@ namespace Template.Managers
         {
             _uiManager.GameLost();
         }
-        private void StopMovement()
-        {
+        #endregion
 
+
+        public void InitializeCargoCapacity(int capacity) // should be called from the truck script 
+        {
+            CargoCapacity = capacity;
+        }
+        public void FullCapacity()
+        {
+            Debug.Log("CAPACTIY IS FULL");
+        }
+        public void TruckFullyLoaded()
+        {
+            Debug.Log("truck is fully loaded");
         }
     }
     public enum GameState
     {
         GamePreStart = 0,
         GameAwaitingStart = 1,
-        GameStarted = 2,
-        GameCheckingResults = 3,
-        GameWon = 4,
-        GameLost = 5,
+        StackState = 2,
+        DriveState = 3,
+        DeliverState = 4,
+        GameWon = 5,
+        GameLost = 6,
     }
 }

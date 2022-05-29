@@ -4,7 +4,7 @@ using UnityEngine;
 using ObjectPooling;
 using DG.Tweening;
 
-namespace Template.Interactable
+namespace Cargo.Interactable
 {
     public class Generator : MonoBehaviour, IInteractable
     {

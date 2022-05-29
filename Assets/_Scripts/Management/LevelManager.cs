@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Template.Managers
+namespace Cargo.Managers
 {
     public class LevelManager : MonoBehaviour
     {

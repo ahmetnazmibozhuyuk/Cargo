@@ -1,12 +1,13 @@
 using UnityEngine;
 
-namespace Template.Control
+namespace Cargo.Control
 {
     [RequireComponent(typeof(Rigidbody), typeof(Animator))]
-    public class Controller : MonoBehaviour
+    public class TopDownControl : MonoBehaviour
     {
-        [SerializeField] private float maxSpeed;
-        [SerializeField] private float turnRate;
+        [SerializeField] private float maxSpeed = 1f;
+        [SerializeField] private float turnRate = 5f;
+        [SerializeField] private float maxMagnitude = 10f;
 
         private Rigidbody _rigidbody;
         private Animator _animator;
@@ -38,10 +39,9 @@ namespace Template.Control
             }
             else if (Input.GetMouseButton(0))
             {
-                _offset = Vector3.ClampMagnitude((Input.mousePosition - _hitDownPosition), 10);
+                _offset = Vector3.ClampMagnitude((Input.mousePosition - _hitDownPosition), maxMagnitude);
                 _offsetOnXZ = new Vector3(_offset.x, _offset.z, _offset.y);
 
-                _animator.SetBool("IsMoving", true);
 
                 if (_offsetOnXZ != Vector3.zero)
                     _rotateVector = _offsetOnXZ;
@@ -50,8 +50,8 @@ namespace Template.Control
             {
                 _offset = Vector3.zero;
                 _offsetOnXZ = Vector3.zero;
-                _animator.SetBool("IsMoving", false);
             }
+            _animator.SetFloat("MovementSpeed", _offset.magnitude / maxMagnitude); // todo : expensive operation can be removed to save a few frames
         }
         private void AssignMovement()
         {

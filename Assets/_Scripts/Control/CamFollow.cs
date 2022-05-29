@@ -1,7 +1,7 @@
 using UnityEngine;
-using Template.Managers;
+using Cargo.Managers;
 
-namespace Template.Control
+namespace Cargo.Control
 {
     public class CamFollow : MonoBehaviour
     {
