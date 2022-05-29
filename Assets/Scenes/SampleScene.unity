@@ -180,7 +180,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 214c796884db81443b95216040cc4acb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stockpileCapacity: 6
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1773,13 +1772,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1576909196484657}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab4093c39cb62d94dba18116357ff1cb, type: 3}
+  m_Script: {fileID: 11500000, guid: 2716416a236204e4e971f5c6ba0aabf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 1294490544}
-  speed: 5
-  accelerationRate: 0
-  decelerationRate: 0
+  truckData: {fileID: 11400000, guid: 0682a4c07d1763140bad5be5fbbacc13, type: 2}
 --- !u!4 &169527656880892452
 Transform:
   m_ObjectHideFlags: 0

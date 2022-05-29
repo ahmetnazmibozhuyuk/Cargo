@@ -1,23 +1,34 @@
 using UnityEngine;
 using PathCreation;
 using Cargo.Managers;
+using Cargo.Interactable;
 
 namespace Cargo.Control
 {
-    public class TruckControl : MonoBehaviour
+    [RequireComponent(typeof(Stockpile))]
+    public abstract class TruckBase : MonoBehaviour
     {
         public PathCreator pathCreator;
 
-        [SerializeField] private float speed;
-        [SerializeField] private float accelerationRate;
-        [SerializeField] private float decelerationRate;
+        [SerializeField] protected TruckData truckData;
+
+        private Stockpile _truckCargoBed;
 
         private EndOfPathInstruction _endOfPathInstruction;
 
         private float _distanceTravelled;
 
+        protected virtual void Awake()
+        {
+            _truckCargoBed = GetComponent<Stockpile>();
+        }
+        protected virtual void Start()
+        {
+            GameManager.instance.InitializeCargoCapacity(truckData.TruckCapacity);
+            _truckCargoBed.InitializePositions();
+        }
 
-        private void Update()
+        protected virtual void Update()
         {
             if (GameManager.instance.CurrentState == GameState.DriveState)
                 SetPositionRotation();
@@ -26,7 +37,7 @@ namespace Cargo.Control
         {
             if (pathCreator != null)
             {
-                _distanceTravelled += speed * Time.deltaTime;
+                _distanceTravelled += truckData.Speed * Time.deltaTime;
                 transform.SetPositionAndRotation(pathCreator.path.GetPointAtDistance(_distanceTravelled, _endOfPathInstruction),
                     pathCreator.path.GetRotationAtDistance(_distanceTravelled, _endOfPathInstruction));
             }

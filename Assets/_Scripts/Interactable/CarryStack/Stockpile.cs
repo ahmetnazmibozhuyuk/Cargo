@@ -10,7 +10,7 @@ namespace Cargo.Interactable
         public bool FullCapacity { get; set; }
         public InteractableType Type { get; set; }
 
-        [SerializeField] private int stockpileCapacity;
+        //[SerializeField] private int stockpileCapacity;
 
         private List<ObjectData> _objectDataList = new List<ObjectData>();
 
@@ -22,15 +22,9 @@ namespace Cargo.Interactable
         {
             Type = InteractableType.Stockpile;
         }
-        private void Start()
+        public void InitializePositions()
         {
-            InitializePositions();
-
-            stockpileCapacity = GameManager.instance.CargoCapacity;
-        }
-        private void InitializePositions()
-        {
-            for (int i = 0; i < stockpileCapacity; i++)
+            for (int i = 0; i < GameManager.instance.CargoCapacity; i++)
             {
                 _objectDataList.Add(new ObjectData(new Vector3(_localX + transform.position.x,
                     _localY + transform.position.y, _localZ + transform.position.z)));
@@ -50,7 +44,7 @@ namespace Cargo.Interactable
         }
         public void TakeObject(GameObject givenObj, Transform parent)
         {
-            if (_counter < stockpileCapacity)
+            if (_counter < GameManager.instance.CargoCapacity)
             {
                 if (givenObj == null) return;
                 _objectDataList[_counter].ObjectHeld = givenObj;
@@ -59,7 +53,7 @@ namespace Cargo.Interactable
                 givenObj.transform.SetParent(transform);
                 _counter++;
                 //GameManager.instance.AddBoxToStockpile();
-                if (_counter >= stockpileCapacity)
+                if (_counter >= GameManager.instance.CargoCapacity)
                 {
                     FullCapacity = true;
                     GameManager.instance.TruckFullyLoaded();
