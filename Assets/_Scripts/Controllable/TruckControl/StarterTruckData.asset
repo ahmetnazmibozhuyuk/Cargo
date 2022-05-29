@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: StarterTruckData
   m_EditorClassIdentifier: 
   TruckName: Starter Truck
-  TruckDescription: The basic truck for the beginning.
+  TruckDescription: The basic truck for the starters.
   Speed: 5
-  AccelerationRate: 0.1
-  DecelerationRate: 0.1
+  AccelerationRate: 0.5
+  DecelerationRate: 0.5
   TruckCapacity: 15
   UnlockPrice: 0

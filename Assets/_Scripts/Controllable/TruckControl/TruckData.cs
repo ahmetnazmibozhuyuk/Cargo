@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Cargo.Control
 {
-    [CreateAssetMenu(fileName = "NewTruckData", menuName = "Data/TruckData")]
+    [CreateAssetMenu(fileName = "NewTruckData", menuName = "TruckData")]
     public class TruckData : ScriptableObject
     {
         [Header("Truck Identity")]
@@ -12,9 +12,8 @@ namespace Cargo.Control
         public float Speed;
         public float AccelerationRate;
         public float DecelerationRate;
-
         public int TruckCapacity;
-
+        [Header("Truck Price")]
         public int UnlockPrice;
     }
 }
