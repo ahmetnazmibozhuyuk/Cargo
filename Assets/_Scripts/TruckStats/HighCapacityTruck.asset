@@ -17,5 +17,5 @@ MonoBehaviour:
   Speed: 4
   AccelerationRate: 0.3
   DecelerationRate: 0.2
-  TruckCapacity: 25
+  TruckCapacity: 48
   UnlockPrice: 120

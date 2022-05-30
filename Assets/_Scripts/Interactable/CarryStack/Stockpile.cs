@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
@@ -10,14 +11,21 @@ namespace Cargo.Interactable
         public bool FullCapacity { get; set; }
         public InteractableType Type { get; set; }
 
-        //[SerializeField] private int stockpileCapacity;
+        [SerializeField] private Transform stockTransform;
 
         private List<ObjectData> _objectDataList = new List<ObjectData>();
 
-        private float _localX = 1, _localY = 0.5f, _localZ = 5;
+        private float _localX = 0, _localY = 0, _localZ = 1;
+
+        [SerializeField] private int maxX = 4, maxZ = 2;
 
         private int _counter;
 
+        private bool _inTheZone;
+
+        private readonly float _gatherRate = 0.05f;
+
+        private readonly float _cargoJumpPower = 4f;
         private void Awake()
         {
             Type = InteractableType.Stockpile;
@@ -26,21 +34,51 @@ namespace Cargo.Interactable
         {
             for (int i = 0; i < GameManager.instance.CargoCapacity; i++)
             {
-                _objectDataList.Add(new ObjectData(new Vector3(_localX + transform.position.x,
-                    _localY + transform.position.y, _localZ + transform.position.z)));
+                _objectDataList.Add(new ObjectData(new Vector3(_localX + stockTransform.position.x,
+                    _localY + stockTransform.position.y, _localZ + stockTransform.position.z)));
 
-                if (_localX > 2)
+                if (_localZ > maxZ)
                 {
-                    _localY++;
+                    _localZ = 0;
+                    _localX++;
+                }
+                if (_localX > maxX)
+                {
                     _localX = 0;
+                    _localY++;
                 }
-                if (_localY > 2)
-                {
-                    _localZ--;
-                    _localY = 0.5f;
-                }
-                _localX++;
+                _localZ++;
             }
+        }
+
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (!_inTheZone) return;
+            if (other.GetComponent<IInteractable>() == null) return;
+            IInteractable interactable = other.GetComponent<IInteractable>();
+            _inTheZone = true;
+            if(interactable.Type == InteractableType.Unlockable)
+            {
+                StartCoroutine(Co_SendCubeTo(interactable));
+            }
+        }
+
+        private IEnumerator Co_SendCubeTo(IInteractable interactable)
+        {
+            while (_inTheZone)
+            {
+                if (interactable.FullCapacity)
+                {
+                    yield return new WaitForSeconds(_gatherRate);
+                }
+                else
+                {
+                    interactable.TakeObject(GiveObject(), null);
+                    yield return new WaitForSeconds(_gatherRate);
+                }
+            }
+            yield break;
         }
         public void TakeObject(GameObject givenObj, Transform parent)
         {
@@ -49,10 +87,9 @@ namespace Cargo.Interactable
                 if (givenObj == null) return;
                 _objectDataList[_counter].ObjectHeld = givenObj;
                 givenObj.transform.rotation = Quaternion.Euler(0, 0, 0);
-                givenObj.transform.DOJump(_objectDataList[_counter].ObjectPosition, 2, 1, 0.1f);
+                givenObj.transform.DOJump(_objectDataList[_counter].ObjectPosition, _cargoJumpPower, 1, 0.1f);
                 givenObj.transform.SetParent(transform);
                 _counter++;
-                //GameManager.instance.AddBoxToStockpile();
                 if (_counter >= GameManager.instance.CargoCapacity)
                 {
                     FullCapacity = true;
@@ -68,9 +105,8 @@ namespace Cargo.Interactable
                 return null;
             }
             _counter--;
-            //GameManager.instance.RemoveBoxFromStockpile();
 
-            var temp = _objectDataList[_counter].ObjectHeld;
+            GameObject temp = _objectDataList[_counter].ObjectHeld;
             _objectDataList[_counter].ObjectHeld = null;
             return temp;
         }

@@ -2,18 +2,80 @@ fileFormatVersion: 2
 guid: 583d8a6e8a34ada41b902d79390f2050
 ModelImporter:
   serializedVersion: 21202
-  internalIDToNameTable: []
-  externalObjects:
+  internalIDToNameTable:
   - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Glass
-    second: {fileID: 2100000, guid: 4d2298b6e821c5a419324e52844ad7d2, type: 2}
+      74: -2583751767738467375
+    second: DumpTruck|Armature|mixamo.com|Layer0
   - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material
-    second: {fileID: 2100000, guid: bc52619565f0f874aad326a742aac4d2, type: 2}
+      74: -5007716169454584256
+    second: DumpTruck|Armature|mixamo.com|Layer0.001
+  - first:
+      74: 2714540848681347426
+    second: DumpTruck|DumpTruckAction
+  - first:
+      74: -5331669173407392358
+    second: DumpTruck|FrontWheelsAction
+  - first:
+      74: -3246815168106314263
+    second: DumpTruck|RearWheels.001Action
+  - first:
+      74: -1199412944482809840
+    second: DumpTruck|RearWheelsAction
+  - first:
+      74: -7121257162952876730
+    second: FrontWheels|Armature|mixamo.com|Layer0
+  - first:
+      74: -6350575217602027848
+    second: FrontWheels|Armature|mixamo.com|Layer0.001
+  - first:
+      74: 5415868629989689500
+    second: FrontWheels|DumpTruckAction
+  - first:
+      74: 43134053396495397
+    second: FrontWheels|FrontWheelsAction
+  - first:
+      74: 588911774648345573
+    second: FrontWheels|RearWheels.001Action
+  - first:
+      74: -2173815058452938012
+    second: FrontWheels|RearWheelsAction
+  - first:
+      74: -3979501332459000220
+    second: RearWheels|Armature|mixamo.com|Layer0
+  - first:
+      74: -6248188508354742525
+    second: RearWheels|Armature|mixamo.com|Layer0.001
+  - first:
+      74: -8771858815130477984
+    second: RearWheels|DumpTruckAction
+  - first:
+      74: 519080748921647870
+    second: RearWheels|FrontWheelsAction
+  - first:
+      74: -5210745140264550365
+    second: RearWheels|RearWheels.001Action
+  - first:
+      74: -3746978662550381282
+    second: RearWheels|RearWheelsAction
+  - first:
+      74: 3302246460024111811
+    second: RearWheels.001|Armature|mixamo.com|Layer0
+  - first:
+      74: 2663919886225336673
+    second: RearWheels.001|Armature|mixamo.com|Layer0.001
+  - first:
+      74: 8835913407111282928
+    second: RearWheels.001|DumpTruckAction
+  - first:
+      74: 7192268687573510930
+    second: RearWheels.001|FrontWheelsAction
+  - first:
+      74: -748598360937750844
+    second: RearWheels.001|RearWheels.001Action
+  - first:
+      74: 9179911845992303744
+    second: RearWheels.001|RearWheelsAction
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

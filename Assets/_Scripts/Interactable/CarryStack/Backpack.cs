@@ -20,7 +20,7 @@ namespace Cargo.Interactable
 
         [SerializeField] private int backpackCapacity;
 
-        [SerializeField] private float gatherRate = 0.1f;
+
 
         [SerializeField] private GathererType gathererType;
 
@@ -28,8 +28,12 @@ namespace Cargo.Interactable
 
         private Animator _animator;
 
+        private readonly float gatherRate = 0.05f;
+
         private float _localY;
         private float _objectTransferSpeed = 0.15f;
+
+        private readonly float _cargoJumpPower = 4f;
 
         private bool _inTheZone;
 
@@ -63,7 +67,7 @@ namespace Cargo.Interactable
 
                 givenObj.transform.DOJump(new Vector3(backpackTransform.position.x,
                     backpackTransform.position.y + _objectDataList[Counter].ObjectPosition.y,
-                    backpackTransform.position.z), 2, 1, _objectTransferSpeed);
+                    backpackTransform.position.z), _cargoJumpPower, 1, _objectTransferSpeed);
                 StartCoroutine(Co_CorrectCubePosition(givenObj, Counter));
                 Counter++;
                 if (Counter >= backpackCapacity) FullCapacity = true;
@@ -98,7 +102,7 @@ namespace Cargo.Interactable
         {
             if (_inTheZone) return;
             if (other.GetComponent<IInteractable>() == null) return;
-            var interactable = other.GetComponent<IInteractable>();
+            IInteractable interactable = other.GetComponent<IInteractable>();
             _inTheZone = true;
             switch (interactable.Type)
             {
@@ -106,9 +110,6 @@ namespace Cargo.Interactable
                     StartCoroutine(Co_GetCubeFrom(interactable));
                     break;
                 case InteractableType.Stockpile:
-                    StartCoroutine(Co_SendCubeTo(interactable));
-                    break;
-                case InteractableType.Unlockable:
                     StartCoroutine(Co_SendCubeTo(interactable));
                     break;
             }
@@ -130,7 +131,6 @@ namespace Cargo.Interactable
                 TakeObject(takenObject, transform);
                 if (takenObject != null)
                     _cargoGathered++;
-                Debug.Log("cargo amount = " + _cargoGathered);
                 yield return new WaitForSeconds(gatherRate);
 
             }

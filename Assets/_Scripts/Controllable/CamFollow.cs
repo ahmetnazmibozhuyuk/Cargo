@@ -7,7 +7,8 @@ namespace Cargo.Control
     {
         private void Update()
         {
-            transform.position = GameManager.instance.Player.transform.position;
+            if (GameManager.instance.CamFollowTarget != null)
+                transform.position = GameManager.instance.CamFollowTarget.transform.position;
         }
     }
 }

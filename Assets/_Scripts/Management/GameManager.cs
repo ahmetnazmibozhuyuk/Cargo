@@ -15,6 +15,9 @@ namespace Cargo.Managers
         }
         [SerializeField] private GameObject player;
 
+        public GameObject MainTruck { get; private set; }
+        public Transform CamFollowTarget { get; private set; }
+
         public int CargoCapacity { get; private set; }
 
 
@@ -30,7 +33,8 @@ namespace Cargo.Managers
         }
         private void Start()
         {
-            ChangeState(GameState.GameAwaitingStart);
+            //Switch to awaiting start; then use menu to start and switch to stack state
+            ChangeState(GameState.StackState);
         }
         #region Game States
         public void ChangeState(GameState newState)
@@ -68,10 +72,13 @@ namespace Cargo.Managers
         }
         private void StackState()
         {
+            CamFollowTarget = Player.transform;
             _uiManager.StackState();
         }
         private void DriveState()
         {
+            Player.SetActive(false);
+            CamFollowTarget = MainTruck.transform;
             _uiManager.DriveState();
         }
         private void DeliverState()
@@ -91,8 +98,9 @@ namespace Cargo.Managers
         #endregion
 
 
-        public void InitializeCargoCapacity(int capacity) // should be called from the truck script 
+        public void AssignTruck(GameObject truckObject, int capacity) 
         {
+            MainTruck = truckObject;
             CargoCapacity = capacity;
         }
         public void FullCapacity()
@@ -102,6 +110,8 @@ namespace Cargo.Managers
         public void TruckFullyLoaded()
         {
             Debug.Log("truck is fully loaded");
+            ChangeState(GameState.DriveState);
+
         }
     }
     public enum GameState

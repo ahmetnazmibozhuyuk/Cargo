@@ -24,11 +24,11 @@ namespace Cargo.Control
         }
         protected virtual void Start()
         {
-            GameManager.instance.InitializeCargoCapacity(truckData.TruckCapacity);
+            GameManager.instance.AssignTruck(gameObject,truckData.TruckCapacity);
             _truckCargoBed.InitializePositions();
         }
 
-        protected virtual void Update()
+        protected virtual void FixedUpdate()
         {
             if (GameManager.instance.CurrentState == GameState.DriveState)
                 SetPositionRotation();
@@ -38,10 +38,20 @@ namespace Cargo.Control
             if (pathCreator != null)
             {
                 _distanceTravelled += truckData.Speed * Time.deltaTime;
-                transform.SetPositionAndRotation(pathCreator.path.GetPointAtDistance(_distanceTravelled, _endOfPathInstruction),
-                    pathCreator.path.GetRotationAtDistance(_distanceTravelled, _endOfPathInstruction));
+
+                transform.position = pathCreator.path.GetPointAtDistance(_distanceTravelled, _endOfPathInstruction);
+
+                transform.eulerAngles = SetRotationEuler();
             }
 
+            //z+90
+            //y-90
+        }
+        private Vector3 SetRotationEuler()
+        {
+            return new Vector3(pathCreator.path.GetRotationAtDistanceAsEuler(_distanceTravelled, _endOfPathInstruction).x,
+                pathCreator.path.GetRotationAtDistanceAsEuler(_distanceTravelled, _endOfPathInstruction).y,
+                pathCreator.path.GetRotationAtDistanceAsEuler(_distanceTravelled, _endOfPathInstruction).z+90);
         }
     }
 }

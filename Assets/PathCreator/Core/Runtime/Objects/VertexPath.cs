@@ -197,6 +197,11 @@ namespace PathCreation {
             float t = dst / length;
             return GetRotation (t, endOfPathInstruction);
         }
+        public Vector3 GetRotationAtDistanceAsEuler(float dst, EndOfPathInstruction endOfPathInstruction = EndOfPathInstruction.Loop)
+        {
+            float t = dst / length;
+            return GetRotation(t, endOfPathInstruction).eulerAngles;
+        }
 
         /// Gets point on path based on 'time' (where 0 is start, and 1 is end of path).
         public Vector3 GetPointAtTime (float t, EndOfPathInstruction endOfPathInstruction = EndOfPathInstruction.Loop) {
