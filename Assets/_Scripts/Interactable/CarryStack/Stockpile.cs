@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
@@ -50,11 +50,9 @@ namespace Cargo.Interactable
                 _localZ++;
             }
         }
-
-
         private void OnTriggerEnter(Collider other)
         {
-            if (!_inTheZone) return;
+            if (_inTheZone) return;
             if (other.GetComponent<IInteractable>() == null) return;
             IInteractable interactable = other.GetComponent<IInteractable>();
             _inTheZone = true;
@@ -63,6 +61,10 @@ namespace Cargo.Interactable
                 StartCoroutine(Co_SendCubeTo(interactable));
             }
         }
+        private void OnTriggerExit(Collider other)
+        {
+            _inTheZone = false;
+        }
 
         private IEnumerator Co_SendCubeTo(IInteractable interactable)
         {
@@ -70,6 +72,7 @@ namespace Cargo.Interactable
             {
                 if (interactable.FullCapacity)
                 {
+                    interactable.GiveObject();
                     yield return new WaitForSeconds(_gatherRate);
                 }
                 else
@@ -102,10 +105,20 @@ namespace Cargo.Interactable
             FullCapacity = false;
             if (_counter <= 0)
             {
+                if(GameManager.instance.CurrentState == GameState.DriveState)
+                {
+                    GameManager.instance.ChangeState(GameState.GameLost);
+                    Debug.Log("game lost");
+                }
+                else if(GameManager.instance.CurrentState == GameState.DeliverState)
+                {
+                    GameManager.instance.ChangeState(GameState.GameWon);
+                    Debug.Log("game won");
+                }
                 return null;
             }
             _counter--;
-
+            Debug.Log("game manager artı puan methodu");
             GameObject temp = _objectDataList[_counter].ObjectHeld;
             _objectDataList[_counter].ObjectHeld = null;
             return temp;

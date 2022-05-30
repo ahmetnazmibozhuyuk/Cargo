@@ -12,12 +12,6 @@ namespace Cargo.Interactable
         public bool FullCapacity { get; set; }
         public InteractableType Type { get; set; }
 
-        //[SerializeField] private List<GameObject> buildingToUnlock = new List<GameObject>();
-
-        [SerializeField] private TextMeshProUGUI unlockAmountText;
-
-        [SerializeField] private GameObject lockedText;
-
         [SerializeField] private Transform objectMovePoint;
         [SerializeField] private int unlockAmount;
 
@@ -25,13 +19,8 @@ namespace Cargo.Interactable
         {
             Type = InteractableType.Unlockable;
         }
-        private void Start()
-        {
-            unlockAmountText.SetText(unlockAmount + " more to unlock!");
-        }
         public GameObject GiveObject()
         {
-            Debug.Log("An object is taken from the unlockable");
             return null;
         }
         public void TakeObject(GameObject givenObj, Transform parent)
@@ -45,29 +34,13 @@ namespace Cargo.Interactable
                 ObjectPool.Despawn(givenObj);
             });
             unlockAmount--;
-            unlockAmountText.SetText(unlockAmount + " more to unlock!");
+            GameManager.instance.AddPoint();
             if (unlockAmount <= 0)
             {
                 FullCapacity = true;
-                UnlockBuilding();
+
             }
         }
-        private void UnlockBuilding()
-        {
-            //GameManager.instance.Unlocked();
-            //UnlockPart(0);
-            unlockAmountText.SetText("This building is unlocked!");
-            lockedText.SetActive(false);
-        }
-        //private void UnlockPart(int index)
-        //{
-        //    buildingToUnlock[index].SetActive(true);
-        //    buildingToUnlock[index].transform.DOScale(1, 0.3f).SetEase(Ease.OutSine).OnComplete(() =>
-        //    {
-        //        index++;
-        //        if (index < buildingToUnlock.Count && buildingToUnlock[index] != null)
-        //            UnlockPart(index);
-        //    });
-        //}
+
     }
 }

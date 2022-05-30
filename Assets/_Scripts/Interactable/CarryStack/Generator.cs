@@ -61,6 +61,7 @@ namespace Cargo.Interactable
                 _objectDataList[_counter].ObjectHeld = temp;
                 _objectDataList[_counter].ObjectHeld.transform.position = _objectDataList[_counter].ObjectPosition;
                 temp.transform.DOScale(1, 0.5f).SetEase(Ease.OutBounce);
+                temp.transform.SetParent(transform);
                 _counter++;
                 yield return new WaitForSeconds(spawnRate);
                 StartCoroutine(SpawnObject());

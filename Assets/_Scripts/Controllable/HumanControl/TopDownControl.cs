@@ -1,4 +1,5 @@
 using UnityEngine;
+using Cargo.Managers;
 
 namespace Cargo.Control
 {
@@ -24,6 +25,12 @@ namespace Cargo.Control
         }
         private void Update()
         {
+            if (GameManager.instance.CurrentState == GameState.DriveState)
+            {
+                _animator.SetFloat("MovementSpeed", 0);
+                Destroy(this);
+                return;
+            }
             SetControl();
         }
         private void FixedUpdate()
@@ -60,5 +67,6 @@ namespace Cargo.Control
                 _rigidbody.MoveRotation(Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(_rotateVector), Time.deltaTime * turnRate * 100));
         }
         #endregion
+
     }
 }

@@ -77,7 +77,7 @@ namespace Cargo.Managers
         }
         private void DriveState()
         {
-            Player.SetActive(false);
+
             CamFollowTarget = MainTruck.transform;
             _uiManager.DriveState();
         }
@@ -112,6 +112,10 @@ namespace Cargo.Managers
             Debug.Log("truck is fully loaded");
             ChangeState(GameState.DriveState);
 
+        }
+        public void AddPoint()
+        {
+            Debug.Log("point added");
         }
     }
     public enum GameState
