@@ -31,7 +31,7 @@ namespace Cargo.Interactable
         private readonly float gatherRate = 0.05f;
 
         private float _localY;
-        private float _objectTransferSpeed = 0.15f;
+        private float _objectTransferSpeed = 0.2f;
 
         private readonly float _cargoJumpPower = 4f;
 
@@ -68,6 +68,10 @@ namespace Cargo.Interactable
                 givenObj.transform.DOJump(new Vector3(backpackTransform.position.x,
                     backpackTransform.position.y + _objectDataList[Counter].ObjectPosition.y,
                     backpackTransform.position.z), _cargoJumpPower, 1, _objectTransferSpeed);
+
+
+
+
                 StartCoroutine(Co_CorrectCubePosition(givenObj, Counter));
                 Counter++;
                 if (Counter >= backpackCapacity) FullCapacity = true;
@@ -79,7 +83,7 @@ namespace Cargo.Interactable
             go.transform.position = new Vector3(backpackTransform.position.x,
                     backpackTransform.position.y + _objectDataList[position].ObjectPosition.y,
                     backpackTransform.position.z);
-        } 
+        }
         public GameObject GiveObject()
         {
             if (Counter <= 0)

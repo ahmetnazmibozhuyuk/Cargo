@@ -7,7 +7,7 @@ namespace Cargo.Control
 {
     public abstract class TrackFollowerBase : MonoBehaviour
     {
-        public PathCreator pathCreator;
+        public PathCreator TrackPathCreator;
 
         private EndOfPathInstruction _endOfPathInstruction;
 
@@ -29,18 +29,18 @@ namespace Cargo.Control
 
         private void SetPositionRotation()
         {
-            if (pathCreator != null)
+            if (TrackPathCreator != null)
             {
                 _distanceTravelled += _speed * _currentSpeedMultipier * Time.deltaTime;
-                transform.position = pathCreator.path.GetPointAtDistance(_distanceTravelled, _endOfPathInstruction);
+                transform.position = TrackPathCreator.path.GetPointAtDistance(_distanceTravelled, _endOfPathInstruction);
                 transform.eulerAngles = SetRotationEuler();
             }
         }
         private Vector3 SetRotationEuler()
         {
-            return new Vector3(pathCreator.path.GetRotationAtDistanceAsEuler(_distanceTravelled, _endOfPathInstruction).x+ _rotationOffsetX,
-                pathCreator.path.GetRotationAtDistanceAsEuler(_distanceTravelled, _endOfPathInstruction).y+ _rotationOffsetY,
-                pathCreator.path.GetRotationAtDistanceAsEuler(_distanceTravelled, _endOfPathInstruction).z+ _rotationOffsetZ);
+            return new Vector3(TrackPathCreator.path.GetRotationAtDistanceAsEuler(_distanceTravelled, _endOfPathInstruction).x+ _rotationOffsetX,
+                TrackPathCreator.path.GetRotationAtDistanceAsEuler(_distanceTravelled, _endOfPathInstruction).y+ _rotationOffsetY,
+                TrackPathCreator.path.GetRotationAtDistanceAsEuler(_distanceTravelled, _endOfPathInstruction).z+ _rotationOffsetZ);
         }
     }
 }

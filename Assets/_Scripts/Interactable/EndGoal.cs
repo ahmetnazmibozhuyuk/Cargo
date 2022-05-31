@@ -7,7 +7,8 @@ namespace Cargo
     {
         private void OnTriggerEnter(Collider other)
         {
-            GameManager.instance.ChangeState(GameState.DeliverState);
+            if (other.CompareTag("Truck"))
+                GameManager.instance.ChangeState(GameState.DeliverState);
         }
     }
 }

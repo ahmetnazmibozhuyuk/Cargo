@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Cargo.Control;
 
 
 namespace Cargo.Managers
@@ -15,7 +16,7 @@ namespace Cargo.Managers
         }
         [SerializeField] private GameObject player;
 
-        public GameObject MainTruck { get; private set; }
+        public BasicTruckControl MainTruck { get; private set; }
         public Transform CamFollowTarget { get; private set; }
 
         public int CargoCapacity { get; private set; }
@@ -100,7 +101,7 @@ namespace Cargo.Managers
 
         public void AssignTruck(GameObject truckObject, int capacity) 
         {
-            MainTruck = truckObject;
+            MainTruck = truckObject.GetComponent<BasicTruckControl>();
             CargoCapacity = capacity;
         }
         public void FullCapacity()

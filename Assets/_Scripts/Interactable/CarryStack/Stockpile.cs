@@ -27,7 +27,7 @@ namespace Cargo.Interactable
 
         private readonly float _cargoJumpPower = 4f;
 
-        private readonly float _objectTransferSpeed = 0.1f;
+        private readonly float _objectTransferSpeed = 0.5f;
         private void Awake()
         {
             Type = InteractableType.Stockpile;
@@ -99,7 +99,7 @@ namespace Cargo.Interactable
                 {
                     FullCapacity = true;
                     //GameManager.instance.TruckFullyLoaded();
-                    Invoke(nameof(TruckIsLoaded), _objectTransferSpeed);
+                    Invoke(nameof(TruckIsLoaded), _objectTransferSpeed+0.05f);
                 }
             }
         }
@@ -125,7 +125,14 @@ namespace Cargo.Interactable
                 return null;
             }
             _counter--;
-            Debug.Log("game manager artı puan methodu");
+            if (GameManager.instance.CurrentState == GameState.DriveState)
+            {
+                Debug.Log("game manager eksi puan methodu");
+            }
+            else if (GameManager.instance.CurrentState == GameState.DeliverState)
+            {
+                Debug.Log("game manager artı puan methodu");
+            }
             GameObject temp = _objectDataList[_counter].ObjectHeld;
             _objectDataList[_counter].ObjectHeld = null;
             return temp;
