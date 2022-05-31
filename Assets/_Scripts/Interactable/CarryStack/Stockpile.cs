@@ -67,7 +67,6 @@ namespace Cargo.Interactable
         {
             _inTheZone = false;
         }
-
         private IEnumerator Co_SendCubeTo(IInteractable interactable)
         {
             while (_inTheZone)

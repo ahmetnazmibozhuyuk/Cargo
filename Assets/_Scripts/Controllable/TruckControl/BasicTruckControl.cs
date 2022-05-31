@@ -12,7 +12,6 @@ namespace Cargo.Control
 
         private Stockpile _truckCargoBed;
 
-
         private void Awake()
         {
             _truckCargoBed = GetComponent<Stockpile>();
@@ -24,7 +23,6 @@ namespace Cargo.Control
             _rotationOffsetZ = 90;
             _currentSpeedMultipier = 0;
             _truckCargoBed.InitializePositions();
-
         }
         private void Update()
         {
@@ -63,16 +61,13 @@ namespace Cargo.Control
                 GameObject objectToLose = _truckCargoBed.GiveObject();
                 if (objectToLose == null) return;
                 objectToLose.transform.DOMove(new Vector3(
-                    objectToLose.transform.position.x + Random.Range(2, 5),
-                    objectToLose.transform.position.y + Random.Range(2,5),
-                    objectToLose.transform.position.z+ Random.Range(2, 5)), 0.2f);
+                    objectToLose.transform.position.x + Random.Range(2, 10),
+                    objectToLose.transform.position.y + Random.Range(2,10),
+                    objectToLose.transform.position.z+ Random.Range(2, 10)), 0.4f);
 
-                objectToLose.transform.DOScale(0, 0.2f);
+                objectToLose.transform.DOScale(0, 0.4f);
             }
-
             _currentSpeedMultipier = -0.5f;
-
         }
-
     }
 }

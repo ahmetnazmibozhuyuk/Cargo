@@ -12,7 +12,7 @@ namespace Cargo.Managers
         }
         public void StackState()
         {
-
+            
         }
         public void DriveState()
         {
@@ -27,6 +27,11 @@ namespace Cargo.Managers
 
         }
         public void GameLost()
+        {
+
+        }
+
+        public void UpdateScore()
         {
 
         }

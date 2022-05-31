@@ -12,8 +12,6 @@ namespace Cargo.Control
             if (GameManager.instance.CamFollowTarget != null)
                 transform.position = CamPosition();
         }
-
-
         private Vector3 CamPosition()
         {
             return Vector3.Lerp(transform.position, GameManager.instance.CamFollowTarget.transform.position, Time.deltaTime * cameraPositionDelay);

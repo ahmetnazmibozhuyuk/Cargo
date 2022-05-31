@@ -6,10 +6,6 @@ using DG.Tweening;
 
 namespace Cargo.Interactable
 {
-
-    // interactable interface'ini ikiye bölebilirsin; collectable tarzı değiştir crashable interfacei getir
-
-
     public class Backpack : MonoBehaviour, IInteractable
     {
         public bool FullCapacity { get; set; }
@@ -19,10 +15,6 @@ namespace Cargo.Interactable
         [SerializeField] private Transform backpackTransform;
 
         [SerializeField] private int backpackCapacity;
-
-
-
-        [SerializeField] private GathererType gathererType;
 
         private List<ObjectData> _objectDataList = new List<ObjectData>();
 
@@ -68,9 +60,6 @@ namespace Cargo.Interactable
                 givenObj.transform.DOJump(new Vector3(backpackTransform.position.x,
                     backpackTransform.position.y + _objectDataList[Counter].ObjectPosition.y,
                     backpackTransform.position.z), _cargoJumpPower, 1, _objectTransferSpeed);
-
-
-
 
                 StartCoroutine(Co_CorrectCubePosition(givenObj, Counter));
                 Counter++;
@@ -136,7 +125,6 @@ namespace Cargo.Interactable
                 if (takenObject != null)
                     _cargoGathered++;
                 yield return new WaitForSeconds(gatherRate);
-
             }
             yield break;
         }
@@ -182,14 +170,9 @@ namespace Cargo
         public GameObject GiveObject();
         public bool FullCapacity { get; set; }
         public InteractableType Type { get; set; }
-
     }
     public enum InteractableType
     {
         Stockpile = 0, Generator = 1, Unlockable = 2
-    }
-    public enum GathererType
-    {
-        Player = 0, DeliveryPont = 1
     }
 }

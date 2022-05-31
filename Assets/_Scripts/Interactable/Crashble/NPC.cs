@@ -26,18 +26,20 @@ namespace Cargo.Control
         {
             if (!collision.gameObject.CompareTag("Truck")) return;
             GameManager.instance.MainTruck.HitSomething();
+            GetHit(collision.transform.position);
+        }
+        private void GetHit(Vector3 hittingObjectPosition)
+        {
             TrackPathCreator = null;
-
-            _rigidbody.AddForce(FlyForce(collision.gameObject.transform.position));
-
+            _rigidbody.useGravity = true;
             _animator.enabled = false;
             ragdoll.SetActive(true);
+            _rigidbody.AddForce(FlyForce(hittingObjectPosition));
             Destroy(this);
         }
         private Vector3 FlyForce(Vector3 hittingObjectPosition)
         {
             Vector3 direction = (hittingObjectPosition - transform.position).normalized;
-
             return new Vector3(-direction.x * hitForceX, hitForceY, -direction.z * hitForceZ);
         }
     }

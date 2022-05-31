@@ -9,24 +9,21 @@ namespace Cargo.Control
     {
         public PathCreator TrackPathCreator;
 
-        private EndOfPathInstruction _endOfPathInstruction;
-
-        private float _distanceTravelled;
-
         protected float _speed = 1f;
         protected float _currentSpeedMultipier = 1f;
 
         protected float _rotationOffsetX;
         protected float _rotationOffsetY;
         protected float _rotationOffsetZ;
-        
 
+        private float _distanceTravelled;
+
+        private EndOfPathInstruction _endOfPathInstruction;
         protected virtual void FixedUpdate()
         {
             if (GameManager.instance.CurrentState == GameState.DriveState || GameManager.instance.CurrentState == GameState.DeliverState)
                 SetPositionRotation();
         }
-
         private void SetPositionRotation()
         {
             if (TrackPathCreator != null)

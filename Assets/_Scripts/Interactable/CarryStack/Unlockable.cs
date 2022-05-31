@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using TMPro;
 using ObjectPooling;
 using Cargo.Managers;
 
@@ -40,9 +38,7 @@ namespace Cargo.Interactable
             if (unlockAmount <= 0)
             {
                 FullCapacity = true;
-
             }
         }
-
     }
 }

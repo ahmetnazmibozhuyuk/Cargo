@@ -8,6 +8,9 @@ namespace Cargo.Interactable
 {
     public class Generator : MonoBehaviour, IInteractable
     {
+        public bool FullCapacity { get; set; }
+        public InteractableType Type { get; set; }
+
         [SerializeField] private GameObject objectToSpawn;
 
         [SerializeField] private int maxCapacity;
@@ -19,9 +22,6 @@ namespace Cargo.Interactable
         private int _counter;
 
         private float _localX = 1, _localY = 0, _localZ = 0;
-
-        public bool FullCapacity { get; set; }
-        public InteractableType Type { get; set; }
 
         private void Awake()
         {
@@ -84,7 +84,7 @@ namespace Cargo.Interactable
                 return null;
             }
             _counter--;
-            var temp = _objectDataList[_counter].ObjectHeld;
+            GameObject temp = _objectDataList[_counter].ObjectHeld;
             _objectDataList[_counter].ObjectHeld = null;
             return temp;
         }

@@ -9,12 +9,7 @@ namespace Cargo.Managers
     {
         public GameState CurrentState { get; private set; }
 
-        public GameObject Player
-        {
-            get { return player; }
-            set { player = value; }
-        }
-        [SerializeField] private GameObject player;
+        public GameObject Player { get; private set; }
 
         public BasicTruckControl MainTruck { get; private set; }
         public Transform CamFollowTarget { get; private set; }
@@ -73,8 +68,8 @@ namespace Cargo.Managers
         }
         private void StackState()
         {
-            CamFollowTarget = Player.transform;
             _uiManager.StackState();
+            _levelManager.OpenLevel();
         }
         private void DriveState()
         {
@@ -104,6 +99,11 @@ namespace Cargo.Managers
             MainTruck = truckObject.GetComponent<BasicTruckControl>();
             CargoCapacity = capacity;
         }
+        public void AssignPlayer(GameObject player)
+        {
+            Player = player;
+            CamFollowTarget = Player.transform;
+        }
         public void FullCapacity()
         {
             Debug.Log("CAPACTIY IS FULL");
@@ -112,6 +112,8 @@ namespace Cargo.Managers
         public void AddPoint()
         {
             Debug.Log("point added");
+            _levelManager.AddPoint();
+            _uiManager.UpdateScore();
         }
     }
     public enum GameState

@@ -22,6 +22,7 @@ namespace Cargo.Control
         {
             _rigidbody = GetComponent<Rigidbody>();
             _animator = GetComponent<Animator>();
+            GameManager.instance.AssignPlayer(gameObject);
         }
         private void Update()
         {
