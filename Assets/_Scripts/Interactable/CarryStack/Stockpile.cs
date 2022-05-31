@@ -26,6 +26,8 @@ namespace Cargo.Interactable
         private readonly float _gatherRate = 0.05f;
 
         private readonly float _cargoJumpPower = 4f;
+
+        private readonly float _objectTransferSpeed = 0.1f;
         private void Awake()
         {
             Type = InteractableType.Stockpile;
@@ -90,15 +92,20 @@ namespace Cargo.Interactable
                 if (givenObj == null) return;
                 _objectDataList[_counter].ObjectHeld = givenObj;
                 givenObj.transform.rotation = Quaternion.Euler(0, 0, 0);
-                givenObj.transform.DOJump(_objectDataList[_counter].ObjectPosition, _cargoJumpPower, 1, 0.1f);
+                givenObj.transform.DOJump(_objectDataList[_counter].ObjectPosition, _cargoJumpPower, 1, _objectTransferSpeed);
                 givenObj.transform.SetParent(transform);
                 _counter++;
                 if (_counter >= GameManager.instance.CargoCapacity)
                 {
                     FullCapacity = true;
-                    GameManager.instance.TruckFullyLoaded();
+                    //GameManager.instance.TruckFullyLoaded();
+                    Invoke(nameof(TruckIsLoaded), _objectTransferSpeed);
                 }
             }
+        }
+        private void TruckIsLoaded()
+        {
+            GameManager.instance.ChangeState(GameState.DriveState);
         }
         public GameObject GiveObject()
         {

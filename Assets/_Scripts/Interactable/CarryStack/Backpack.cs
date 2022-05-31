@@ -79,7 +79,7 @@ namespace Cargo.Interactable
             go.transform.position = new Vector3(backpackTransform.position.x,
                     backpackTransform.position.y + _objectDataList[position].ObjectPosition.y,
                     backpackTransform.position.z);
-        } //Coroutine'den kurtul timer'a bağla
+        } 
         public GameObject GiveObject()
         {
             if (Counter <= 0)

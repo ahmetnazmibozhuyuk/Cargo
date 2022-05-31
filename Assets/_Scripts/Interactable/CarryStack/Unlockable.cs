@@ -15,6 +15,8 @@ namespace Cargo.Interactable
         [SerializeField] private Transform objectMovePoint;
         [SerializeField] private int unlockAmount;
 
+
+        private readonly float _cargoJumpPower = 7f;
         private void Awake()
         {
             Type = InteractableType.Unlockable;
@@ -28,7 +30,7 @@ namespace Cargo.Interactable
             if (givenObj == null) return;
             if (FullCapacity) return;
             givenObj.transform.DORotateQuaternion(objectMovePoint.rotation, 0.5f);
-            givenObj.transform.DOJump(objectMovePoint.position, 2, 1, 0.5f).OnComplete(() =>
+            givenObj.transform.DOJump(objectMovePoint.position, _cargoJumpPower, 1, 1.2f).OnComplete(() =>
             {
                 givenObj.transform.localScale = new Vector3(0, 0, 0);
                 ObjectPool.Despawn(givenObj);

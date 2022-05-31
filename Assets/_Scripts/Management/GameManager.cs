@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-//using ObjectPooling;
+
 
 namespace Cargo.Managers
 {
@@ -107,12 +107,7 @@ namespace Cargo.Managers
         {
             Debug.Log("CAPACTIY IS FULL");
         }
-        public void TruckFullyLoaded()
-        {
-            Debug.Log("truck is fully loaded");
-            ChangeState(GameState.DriveState);
 
-        }
         public void AddPoint()
         {
             Debug.Log("point added");

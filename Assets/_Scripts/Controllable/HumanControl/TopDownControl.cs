@@ -28,6 +28,7 @@ namespace Cargo.Control
             if (GameManager.instance.CurrentState == GameState.DriveState)
             {
                 _animator.SetFloat("MovementSpeed", 0);
+                _animator.SetBool("WorkIsFinised", true);
                 Destroy(this);
                 return;
             }
