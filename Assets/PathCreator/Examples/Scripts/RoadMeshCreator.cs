@@ -22,6 +22,13 @@ namespace PathCreation.Examples {
         MeshRenderer meshRenderer;
         Mesh mesh;
 
+        private void Start()
+        {
+            AssignMeshComponents();
+            AssignMaterials();
+            CreateRoadMesh();
+        }
+
         protected override void PathUpdated () {
             if (pathCreator != null) {
                 AssignMeshComponents ();
@@ -29,7 +36,6 @@ namespace PathCreation.Examples {
                 CreateRoadMesh ();
             }
         }
-
         void CreateRoadMesh () {
             Vector3[] verts = new Vector3[path.NumPoints * 8];
             Vector2[] uvs = new Vector2[verts.Length];
