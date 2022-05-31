@@ -64,6 +64,7 @@ namespace Cargo.Control
         private void AssignMovement()
         {
             _rigidbody.MovePosition(transform.position + maxSpeed * Time.deltaTime * _offsetOnXZ);
+
             if (_rotateVector != Vector3.zero)
                 _rigidbody.MoveRotation(Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(_rotateVector), Time.deltaTime * turnRate * 100));
         }
