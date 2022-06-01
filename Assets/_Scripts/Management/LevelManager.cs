@@ -1,3 +1,4 @@
+using PathCreation;
 using UnityEngine;
 
 namespace Cargo.Managers
@@ -12,11 +13,15 @@ namespace Cargo.Managers
         public const string LEVEL = "level";
         public const string SCORE = "score";
         #endregion
+
         [SerializeField] private GameObject[] levelArray;
+        [SerializeField] private GameObject[] TruckArray;
 
         [SerializeField] private int singleCargoPoint = 10;
 
-        private GameObject _activeLevel;
+
+        public Level ActiveLevel { get; private set; }
+        
 
         private void Awake()
         {
@@ -34,7 +39,9 @@ namespace Cargo.Managers
                 PlayerPrefs.SetInt("CurrentPoints", 0); // Initialize CurrentPoints key if not already initialized.
             }
         }
-        public void OpenLevel()
+
+        #region Open Level
+        private void OpenLevel()
         {
             if (PlayerPrefs.GetInt(LEVEL) <= levelArray.Length)
             {
@@ -45,24 +52,23 @@ namespace Cargo.Managers
                 OpenRandomLevel(); // Open a random level from the list if the current level value is more than existing levels.
             }
         }
-        #region Open Level
         private void OpenRandomLevel()
         {
-            if (_activeLevel != null)
+            if (ActiveLevel != null)
             {
-                Destroy(_activeLevel);
-                _activeLevel = null;
+                Destroy(ActiveLevel.gameObject);
+                ActiveLevel = null;
             }
-            _activeLevel = Instantiate(levelArray[Random.Range(0, levelArray.Length)], Vector3.zero, Quaternion.identity);
+            ActiveLevel = Instantiate(levelArray[Random.Range(0, levelArray.Length)], Vector3.zero, Quaternion.identity).GetComponent<Level>();
         }
         private void OpenCurrentLevel()
         {
-            if (_activeLevel != null)
+            if (ActiveLevel != null)
             {
-                Destroy(_activeLevel);
-                _activeLevel = null;
+                Destroy(ActiveLevel.gameObject);
+                ActiveLevel = null;
             }
-            _activeLevel = Instantiate(levelArray[PlayerPrefs.GetInt(LEVEL) - 1], Vector3.zero, Quaternion.identity);
+            ActiveLevel = Instantiate(levelArray[PlayerPrefs.GetInt(LEVEL) - 1], Vector3.zero, Quaternion.identity).GetComponent<Level>();
         }
         #endregion
 
@@ -75,6 +81,12 @@ namespace Cargo.Managers
             PlayerPrefs.SetInt(SCORE, PlayerPrefs.GetInt(SCORE) + singleCargoPoint);
         }
 
+        private void SpawnTruck()
+        {
+            var truck = Instantiate(TruckArray[0], ActiveLevel.TruckPath.path.GetPointAtDistance(0, EndOfPathInstruction.Stop), Quaternion.identity);
+            Debug.Log("active truck = " + truck);
+        }
+
         #region State Methods
         public void GameAwaitingStart()
         {
@@ -82,7 +94,8 @@ namespace Cargo.Managers
         }
         public void StackState()
         {
-
+            OpenLevel();
+            SpawnTruck();
         }
         public void DriveState()
         {

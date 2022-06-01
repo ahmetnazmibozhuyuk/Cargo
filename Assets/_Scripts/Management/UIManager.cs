@@ -12,11 +12,15 @@ namespace Cargo.Managers
         [SerializeField] private GameObject gameLostPanel;
         [SerializeField] private GameObject shopPanel;
 
-
-
-
-
-
+        private void Start()
+        {
+            InitializeGame();
+        }
+        private void InitializeGame()
+        {
+            UpdateScore();
+        }
+        
         #region State Methods
         public void GameAwaitingStart()
         {

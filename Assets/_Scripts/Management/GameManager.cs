@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using Cargo.Control;
-
+using PathCreation;
 
 namespace Cargo.Managers
 {
@@ -16,7 +16,6 @@ namespace Cargo.Managers
 
         public int CargoCapacity { get; private set; }
 
-
         private UIManager _uiManager;
         private LevelManager _levelManager;
         private ShopManager _shopManager;
@@ -30,10 +29,13 @@ namespace Cargo.Managers
         }
         private void Start()
         {
+
             //Switch to awaiting start; then use menu to start and switch to stack state
 
             //eğer ilk bölümse direk stack state
             ChangeState(GameState.StackState);
+
+
         }
         #region Game States
         public void ChangeState(GameState newState)
@@ -71,8 +73,8 @@ namespace Cargo.Managers
         }
         private void StackState()
         {
+            _levelManager.StackState();
             _uiManager.StackState();
-            _levelManager.OpenLevel();
         }
         private void DriveState()
         {
@@ -101,11 +103,17 @@ namespace Cargo.Managers
         {
             MainTruck = truckObject.GetComponent<BasicTruckControl>();
             CargoCapacity = capacity;
+            MainTruck.TrackPathCreator = _levelManager.ActiveLevel.TruckPath;
+
+
+
         }
         public void AssignPlayer(GameObject player)
         {
             Player = player;
             CamFollowTarget = Player.transform;
+
+
         }
         public void FullCapacity()
         {

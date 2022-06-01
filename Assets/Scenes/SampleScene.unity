@@ -158,7 +158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -240, y: -25}
+  m_AnchoredPosition: {x: -320, y: -25}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5294929
@@ -215,8 +215,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_HorizontalAlignment: 4
+  m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1087,6 +1087,9 @@ MonoBehaviour:
   levelArray:
   - {fileID: 9033586234392802455, guid: 1fe873395f400b343b9f8bdcc5a46007, type: 3}
   - {fileID: 9033586234392802455, guid: f41a1c6c7e2f8794ba4e53786545e172, type: 3}
+  TruckArray:
+  - {fileID: 7107668069448438667, guid: b4fcdc5c48f71bd41b65811e8ac8864e, type: 3}
+  - {fileID: 7107668069448438667, guid: 07ca84db0e0e4d64696f2081c8c8c7e5, type: 3}
   singleCargoPoint: 10
 --- !u!114 &1812025182
 MonoBehaviour:
@@ -1129,9 +1132,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5df0615d94c72d4da864c9f705d8b7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TruckArray:
-  - {fileID: 7107668069448438667, guid: b4fcdc5c48f71bd41b65811e8ac8864e, type: 3}
-  - {fileID: 7107668069448438667, guid: 07ca84db0e0e4d64696f2081c8c8c7e5, type: 3}
 --- !u!1 &1911550299
 GameObject:
   m_ObjectHideFlags: 0

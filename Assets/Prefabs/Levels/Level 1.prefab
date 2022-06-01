@@ -3756,6 +3756,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9033586234392802454}
+  - component: {fileID: 1508285266677381647}
   m_Layer: 0
   m_Name: Level 1
   m_TagString: Untagged
@@ -3790,6 +3791,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1508285266677381647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9033586234392802455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e801f50bfc08772458f422ba6a7a3d9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TruckPath: {fileID: 3896067873074813527}
 --- !u!1 &9033586234499407625
 GameObject:
   m_ObjectHideFlags: 0
@@ -3904,6 +3918,10 @@ PrefabInstance:
     - target: {fileID: 7107668069448438667, guid: b4fcdc5c48f71bd41b65811e8ac8864e, type: 3}
       propertyPath: m_Name
       value: Truck
+      objectReference: {fileID: 0}
+    - target: {fileID: 7107668069448438667, guid: b4fcdc5c48f71bd41b65811e8ac8864e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7109126387258659889, guid: b4fcdc5c48f71bd41b65811e8ac8864e, type: 3}
       propertyPath: m_RootOrder
