@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using Cargo.Control;
-using PathCreation;
 
 namespace Cargo.Managers
 {
-    [RequireComponent(typeof(UIManager), typeof(LevelManager),typeof(ShopManager))]
+    [RequireComponent(typeof(UIManager), typeof(LevelManager))]
     public class GameManager : Singleton<GameManager>
     {
         public GameState CurrentState { get; private set; }
@@ -18,22 +17,24 @@ namespace Cargo.Managers
 
         private UIManager _uiManager;
         private LevelManager _levelManager;
-        private ShopManager _shopManager;
 
         protected override void Awake()
         {
             base.Awake();
             _uiManager = GetComponent<UIManager>();
             _levelManager = GetComponent<LevelManager>();
-            _shopManager = GetComponent<ShopManager>();
         }
         private void Start()
         {
+            if(PlayerPrefs.GetInt(LevelManager.LEVEL) > 1)
+            {
+                ChangeState(GameState.GameAwaitingStart);
+            }
+            else
+            {
+                ChangeState(GameState.StackState);
+            }
 
-            //Switch to awaiting start; then use menu to start and switch to stack state
-
-            //eğer ilk bölümse direk stack state
-            ChangeState(GameState.StackState);
 
 
         }
@@ -104,9 +105,6 @@ namespace Cargo.Managers
             MainTruck = truckObject.GetComponent<BasicTruckControl>();
             CargoCapacity = capacity;
             MainTruck.TrackPathCreator = _levelManager.ActiveLevel.TruckPath;
-
-
-
         }
         public void AssignPlayer(GameObject player)
         {

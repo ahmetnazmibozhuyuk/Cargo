@@ -97,7 +97,6 @@ namespace Cargo.Interactable
                 if (_counter >= GameManager.instance.CargoCapacity)
                 {
                     FullCapacity = true;
-                    //GameManager.instance.TruckFullyLoaded();
                     Invoke(nameof(TruckIsLoaded), _objectTransferSpeed+0.05f);
                 }
             }
@@ -124,14 +123,6 @@ namespace Cargo.Interactable
                 return null;
             }
             _counter--;
-            if (GameManager.instance.CurrentState == GameState.DriveState)
-            {
-                Debug.Log("game manager eksi puan methodu");
-            }
-            else if (GameManager.instance.CurrentState == GameState.DeliverState)
-            {
-                Debug.Log("game manager artı puan methodu");
-            }
             GameObject temp = _objectDataList[_counter].ObjectHeld;
             _objectDataList[_counter].ObjectHeld = null;
             return temp;

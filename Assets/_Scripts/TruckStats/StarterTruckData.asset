@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TruckName: Starter Truck
   TruckDescription: The basic truck the game starts with.
-  Speed: 20
+  Speed: 25
   AccelerationRate: 0.05
   DecelerationRate: 0.05
   TruckCapacity: 30

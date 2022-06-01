@@ -2,6 +2,7 @@ using UnityEngine;
 using Cargo.Interactable;
 using Cargo.Managers;
 using DG.Tweening;
+using ObjectPooling;
 
 namespace Cargo.Control
 {
@@ -65,9 +66,14 @@ namespace Cargo.Control
                     objectToLose.transform.position.y + Random.Range(2,10),
                     objectToLose.transform.position.z+ Random.Range(2, 10)), 0.4f);
 
-                objectToLose.transform.DOScale(0, 0.4f);
+                objectToLose.transform.DOScale(0, 0.4f).OnComplete(() =>
+                {
+                    ObjectPool.Despawn(objectToLose);
+                }
+                );
             }
             _currentSpeedMultipier = -0.5f;
         }
+        
     }
 }

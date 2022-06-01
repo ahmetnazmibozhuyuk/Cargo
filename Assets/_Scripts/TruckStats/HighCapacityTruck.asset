@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TruckName: High Capacity Truck
   TruckDescription: A truck that has a higher capacity but moves slower.
-  Speed: 4
+  Speed: 18
   AccelerationRate: 0.3
   DecelerationRate: 0.2
   TruckCapacity: 48
