@@ -2,21 +2,41 @@ using UnityEngine;
 
 namespace Cargo.Managers
 {
+    // todo : Instantiate the truck in the select phase; assign the road appropriately. Truck could be a separate 
+    // prefab or you could make a data which holds ScriptibleObject and mesh of truck
+
+
     public class LevelManager : MonoBehaviour
     {
+        #region Constant Keys
+        public const string LEVEL = "level";
+        public const string SCORE = "score";
+        #endregion
         [SerializeField] private GameObject[] levelArray;
 
-        [SerializeField] private float singleCargoPoint = 10;
+        [SerializeField] private int singleCargoPoint = 10;
 
         private GameObject _activeLevel;
+
+        private void Awake()
+        {
+            InitializeKeys();
+        }
+        private void InitializeKeys()
+        {
+
+            if (!PlayerPrefs.HasKey(LEVEL))
+            {
+                PlayerPrefs.SetInt(LEVEL, 1); // Initialize CurrentLevel key if not already initialized
+            }
+            if (!PlayerPrefs.HasKey("CurrentPoints"))
+            {
+                PlayerPrefs.SetInt("CurrentPoints", 0); // Initialize CurrentPoints key if not already initialized.
+            }
+        }
         public void OpenLevel()
         {
-            if (!PlayerPrefs.HasKey("CurrentLevel"))
-            {
-                PlayerPrefs.SetInt("CurrentLevel", 1); // Initialize CurrentLevel key if not already initialized
-            }
-
-            if (PlayerPrefs.GetInt("CurrentLevel") <= levelArray.Length)
+            if (PlayerPrefs.GetInt(LEVEL) <= levelArray.Length)
             {
                 OpenCurrentLevel();
             }
@@ -42,17 +62,44 @@ namespace Cargo.Managers
                 Destroy(_activeLevel);
                 _activeLevel = null;
             }
-            _activeLevel = Instantiate(levelArray[PlayerPrefs.GetInt("CurrentLevel") - 1], Vector3.zero, Quaternion.identity);
+            _activeLevel = Instantiate(levelArray[PlayerPrefs.GetInt(LEVEL) - 1], Vector3.zero, Quaternion.identity);
         }
         #endregion
 
         public void NextLevel()
         {
-            PlayerPrefs.SetInt("CurrentLevel", PlayerPrefs.GetInt("CurrentLevel") + 1); // Increase CurrentLevel index by one.
+            PlayerPrefs.SetInt(LEVEL, PlayerPrefs.GetInt(LEVEL) + 1); // Increase CurrentLevel index by one.
         }
         public void AddPoint()
         {
+            PlayerPrefs.SetInt(SCORE, PlayerPrefs.GetInt(SCORE) + singleCargoPoint);
+        }
+
+        #region State Methods
+        public void GameAwaitingStart()
+        {
 
         }
+        public void StackState()
+        {
+
+        }
+        public void DriveState()
+        {
+
+        }
+        public void DeliverState()
+        {
+
+        }
+        public void GameWon()
+        {
+
+        }
+        public void GameLost()
+        {
+
+        }
+        #endregion
     }
 }
