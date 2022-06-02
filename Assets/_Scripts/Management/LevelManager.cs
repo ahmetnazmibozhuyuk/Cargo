@@ -50,11 +50,11 @@ namespace Cargo.Managers
             }
             if (!PlayerPrefs.HasKey(TRUCK_UPGRADE_COST))
             {
-                PlayerPrefs.SetInt(TRUCK_UPGRADE_COST, 200);
+                PlayerPrefs.SetInt(TRUCK_UPGRADE_COST, 100);
             }
             if (!PlayerPrefs.HasKey(CARRY_UPGRADE_COST))
             {
-                PlayerPrefs.SetInt(CARRY_UPGRADE_COST, 2000);
+                PlayerPrefs.SetInt(CARRY_UPGRADE_COST, 300);
             }
         }
         public void ResetKeys()
@@ -63,8 +63,8 @@ namespace Cargo.Managers
             PlayerPrefs.SetInt(SCORE, 0);
             PlayerPrefs.SetInt(SELECTED_TRUCK_INDEX, 0);
             PlayerPrefs.SetInt(BACKPACK_CAPACITY, 2);
-            PlayerPrefs.SetInt(CARRY_UPGRADE_COST, 200);
-            PlayerPrefs.SetInt(TRUCK_UPGRADE_COST, 2000);
+            PlayerPrefs.SetInt(CARRY_UPGRADE_COST, 100);
+            PlayerPrefs.SetInt(TRUCK_UPGRADE_COST, 300);
             UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
         }
 

@@ -10,12 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f12b9a68104ea1742b545ae4de0db5be, type: 3}
-  m_Name: HighCapacityTruck
+  m_Name: Truck 5
   m_EditorClassIdentifier: 
-  TruckName: High Capacity Truck
-  TruckDescription: A truck that has a higher capacity but moves slower.
-  Speed: 18
+  TruckName: Truck5
+  Speed: 30
   AccelerationRate: 0.3
   DecelerationRate: 0.2
-  TruckCapacity: 48
-  UnlockPrice: 120
+  TruckCapacity: 40

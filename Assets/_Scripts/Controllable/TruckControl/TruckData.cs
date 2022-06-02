@@ -7,13 +7,10 @@ namespace Cargo.Control
     {
         [Header("Truck Identity")]
         public string TruckName;
-        public string TruckDescription;
         [Header("Truck Stats")]
         public float Speed;
         public float AccelerationRate;
         public float DecelerationRate;
         public int TruckCapacity;
-        [Header("Truck Price")]
-        public int UnlockPrice;
     }
 }

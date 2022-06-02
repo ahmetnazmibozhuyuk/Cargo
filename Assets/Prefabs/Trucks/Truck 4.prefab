@@ -145,8 +145,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2baaec9a921c7ad4785335c5499708ab, type: 2}
-  - {fileID: 8556262120643298411, guid: 583d8a6e8a34ada41b902d79390f2050, type: 3}
+  - {fileID: 2100000, guid: ba7bb0ee9d61bf44f82fc59bd4cfd738, type: 2}
+  - {fileID: 2100000, guid: 9485e957b48dc5d4db92c5e8db2bfd07, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -361,7 +361,7 @@ GameObject:
   - component: {fileID: 7147472696573574452}
   - component: {fileID: 7147472696573574442}
   m_Layer: 0
-  m_Name: Truck 2
+  m_Name: Truck 4
   m_TagString: Truck
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -400,7 +400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TrackPathCreator: {fileID: 0}
-  truckData: {fileID: 11400000, guid: 1cacf1b6b4356c04691ecbc2b4c501c1, type: 2}
+  truckData: {fileID: 11400000, guid: 362498b782a88d144abf447c96b1010d, type: 2}
 --- !u!114 &7108395740377804332
 MonoBehaviour:
   m_ObjectHideFlags: 0

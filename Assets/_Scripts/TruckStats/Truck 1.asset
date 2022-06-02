@@ -10,12 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f12b9a68104ea1742b545ae4de0db5be, type: 3}
-  m_Name: StarterTruckData
+  m_Name: Truck 1
   m_EditorClassIdentifier: 
-  TruckName: Starter Truck
-  TruckDescription: The basic truck the game starts with.
-  Speed: 25
+  TruckName: Truck1
+  Speed: 15
   AccelerationRate: 0.05
   DecelerationRate: 0.05
-  TruckCapacity: 30
-  UnlockPrice: 0
+  TruckCapacity: 15
