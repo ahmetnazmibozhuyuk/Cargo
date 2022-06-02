@@ -3841,6 +3841,8 @@ MonoBehaviour:
   - {fileID: 9033586234392802455, guid: 1fe873395f400b343b9f8bdcc5a46007, type: 3}
   - {fileID: 9033586234392802455, guid: 0e12bba21eb3a7a49b4348411c6765b0, type: 3}
   - {fileID: 9033586234392802455, guid: 87eadbf9ef1ef4343b041b228f910a10, type: 3}
+  - {fileID: 9033586234392802455, guid: 82076fcf134669f489088e3c466d207d, type: 3}
+  - {fileID: 9033586234392802455, guid: 7c7aa4b5c0b04a94f83ce61d8e6aafac, type: 3}
   TruckArray:
   - {fileID: 7107668069448438667, guid: b4fcdc5c48f71bd41b65811e8ac8864e, type: 3}
   - {fileID: 7107668069448438667, guid: 07ca84db0e0e4d64696f2081c8c8c7e5, type: 3}
