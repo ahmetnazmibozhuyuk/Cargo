@@ -3656,6 +3656,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelArray:
+  - {fileID: 9033586234392802455, guid: 0e12bba21eb3a7a49b4348411c6765b0, type: 3}
   - {fileID: 9033586234392802455, guid: 1fe873395f400b343b9f8bdcc5a46007, type: 3}
   TruckArray:
   - {fileID: 7107668069448438667, guid: b4fcdc5c48f71bd41b65811e8ac8864e, type: 3}
@@ -3663,7 +3664,7 @@ MonoBehaviour:
   - {fileID: 7107668069448438667, guid: fd1d7f933251bbb40a07e95ebf80392a, type: 3}
   - {fileID: 7107668069448438667, guid: fd937209ddd0bc648b3434f70c4fe34d, type: 3}
   - {fileID: 7107668069448438667, guid: 38ae7a7b18bac744f9a9fbc6a259ede6, type: 3}
-  singleCargoPoint: 10
+  singleCargoPoint: 20
 --- !u!114 &1812025182
 MonoBehaviour:
   m_ObjectHideFlags: 0
