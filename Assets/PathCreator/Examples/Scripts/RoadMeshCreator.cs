@@ -30,10 +30,11 @@ namespace PathCreation.Examples {
         }
 
         protected override void PathUpdated () {
-            if (pathCreator != null) {
-                AssignMeshComponents ();
-                AssignMaterials ();
-                CreateRoadMesh ();
+            if (pathCreator != null)
+            {
+                AssignMeshComponents();
+                AssignMaterials();
+                CreateRoadMesh();
             }
         }
         void CreateRoadMesh () {
@@ -128,6 +129,7 @@ namespace PathCreation.Examples {
 
             if (meshHolder == null) {
                 meshHolder = new GameObject ("Road Mesh Holder");
+
                 meshHolder.transform.SetParent(transform);
             }
 

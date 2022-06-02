@@ -34,9 +34,6 @@ namespace Cargo.Managers
             {
                 ChangeState(GameState.StackState);
             }
-
-
-
         }
         #region Game States
         public void ChangeState(GameState newState)
@@ -99,30 +96,27 @@ namespace Cargo.Managers
         }
         #endregion
 
-
         public void AssignTruck(GameObject truckObject, int capacity) 
         {
             MainTruck = truckObject.GetComponent<BasicTruckControl>();
             CargoCapacity = capacity;
             MainTruck.TrackPathCreator = _levelManager.ActiveLevel.TruckPath;
+            UpdateCapacity("0"+ " / " + capacity);
+
         }
         public void AssignPlayer(GameObject player)
         {
             Player = player;
             CamFollowTarget = Player.transform;
-
-
         }
-        public void FullCapacity()
-        {
-            Debug.Log("CAPACTIY IS FULL");
-        }
-
         public void AddPoint()
         {
-            Debug.Log("point added");
             _levelManager.AddPoint();
             _uiManager.UpdateScore();
+        }
+        public void UpdateCapacity(string capacity)
+        {
+            _uiManager.UpdateCapacity(capacity);
         }
     }
     public enum GameState

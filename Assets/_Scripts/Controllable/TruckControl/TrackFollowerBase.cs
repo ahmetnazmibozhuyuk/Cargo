@@ -18,10 +18,10 @@ namespace Cargo.Control
 
         private float _distanceTravelled;
 
-        private EndOfPathInstruction _endOfPathInstruction;
+        protected EndOfPathInstruction _endOfPathInstruction;
+
         protected virtual void FixedUpdate()
         {
-            if (GameManager.instance.CurrentState == GameState.DriveState || GameManager.instance.CurrentState == GameState.DeliverState)
                 SetPositionRotation();
         }
         private void SetPositionRotation()

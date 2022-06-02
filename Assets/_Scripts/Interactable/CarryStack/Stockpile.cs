@@ -94,6 +94,7 @@ namespace Cargo.Interactable
                 givenObj.transform.DOJump(_objectDataList[_counter].ObjectPosition, _cargoJumpPower, 1, _objectTransferSpeed);
                 givenObj.transform.SetParent(transform);
                 _counter++;
+                GameManager.instance.UpdateCapacity(_counter + " / " + GameManager.instance.CargoCapacity);
                 if (_counter >= GameManager.instance.CargoCapacity)
                 {
                     FullCapacity = true;
@@ -113,16 +114,15 @@ namespace Cargo.Interactable
                 if(GameManager.instance.CurrentState == GameState.DriveState)
                 {
                     GameManager.instance.ChangeState(GameState.GameLost);
-                    Debug.Log("game lost");
                 }
                 else if(GameManager.instance.CurrentState == GameState.DeliverState)
                 {
                     GameManager.instance.ChangeState(GameState.GameWon);
-                    Debug.Log("game won");
                 }
                 return null;
             }
             _counter--;
+            GameManager.instance.UpdateCapacity(_counter + " / " + GameManager.instance.CargoCapacity);
             GameObject temp = _objectDataList[_counter].ObjectHeld;
             _objectDataList[_counter].ObjectHeld = null;
             return temp;

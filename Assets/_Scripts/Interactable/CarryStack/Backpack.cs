@@ -14,7 +14,7 @@ namespace Cargo.Interactable
 
         [SerializeField] private Transform backpackTransform;
 
-        [SerializeField] private int backpackCapacity;
+        private int _backpackCapacity = 3;
 
         private List<ObjectData> _objectDataList = new List<ObjectData>();
 
@@ -37,11 +37,16 @@ namespace Cargo.Interactable
         }
         private void Start()
         {
+            Initialize();
+        }
+        private void Initialize()
+        {
+            _backpackCapacity = PlayerPrefs.GetInt(LevelManager.BACKPACK_CAPACITY);
             InitializePositions();
         }
         private void InitializePositions()
         {
-            for (int i = 0; i < backpackCapacity; i++)
+            for (int i = 0; i < _backpackCapacity; i++)
             {
                 _localY++;
                 _objectDataList.Add(new ObjectData(new Vector3(0, _localY, 0)));
@@ -49,7 +54,7 @@ namespace Cargo.Interactable
         }
         public void TakeObject(GameObject givenObj, Transform parent)
         {
-            if (Counter < backpackCapacity)
+            if (Counter < _backpackCapacity)
             {
                 if (givenObj == null) return;
                 _animator.SetBool("IsCarrying", true);
@@ -63,7 +68,7 @@ namespace Cargo.Interactable
 
                 StartCoroutine(Co_CorrectCubePosition(givenObj, Counter));
                 Counter++;
-                if (Counter >= backpackCapacity) FullCapacity = true;
+                if (Counter >= _backpackCapacity) FullCapacity = true;
             }
         }
         private IEnumerator Co_CorrectCubePosition(GameObject go, int position)
@@ -117,7 +122,6 @@ namespace Cargo.Interactable
             {
                 if (_cargoGathered >= GameManager.instance.CargoCapacity)
                 {
-                    GameManager.instance.FullCapacity();
                     yield break;
                 }
                 GameObject takenObject = interactable.GiveObject();

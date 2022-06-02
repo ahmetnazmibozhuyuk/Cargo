@@ -30,7 +30,7 @@ namespace Cargo.Control
             {
                 _animator.SetFloat("MovementSpeed", 0);
                 _animator.SetBool("WorkIsFinised", true);
-                Destroy(this);
+                Destroy(this);                              // Remove the control class once the player changes state
                 return;
             }
             SetControl();
@@ -51,7 +51,6 @@ namespace Cargo.Control
                 _offset = Vector3.ClampMagnitude((Input.mousePosition - _hitDownPosition), maxMagnitude);
                 _offsetOnXZ = new Vector3(_offset.x, _offset.z, _offset.y);
 
-
                 if (_offsetOnXZ != Vector3.zero)
                     _rotateVector = _offsetOnXZ;
             }
@@ -60,7 +59,7 @@ namespace Cargo.Control
                 _offset = Vector3.zero;
                 _offsetOnXZ = Vector3.zero;
             }
-            _animator.SetFloat("MovementSpeed", _offset.magnitude / maxMagnitude); // todo : expensive operation can be removed to save a few frames
+            _animator.SetFloat("MovementSpeed", _offset.magnitude / maxMagnitude);
         }
         private void AssignMovement()
         {
@@ -70,6 +69,5 @@ namespace Cargo.Control
                 _rigidbody.MoveRotation(Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(_rotateVector), Time.deltaTime * turnRate * 100));
         }
         #endregion
-
     }
 }

@@ -21,6 +21,7 @@ namespace Cargo.Control
             _animator = GetComponent<Animator>();
             _speed = speed;
             _rotationOffsetZ = 90;
+            _endOfPathInstruction = PathCreation.EndOfPathInstruction.Loop;
         }
         private void OnCollisionEnter(Collision collision)
         {

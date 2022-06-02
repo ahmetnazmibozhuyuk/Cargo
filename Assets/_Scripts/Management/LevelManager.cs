@@ -3,16 +3,15 @@ using UnityEngine;
 
 namespace Cargo.Managers
 {
-    // todo : Instantiate the truck in the select phase; assign the road appropriately. Truck could be a separate 
-    // prefab or you could make a data which holds ScriptibleObject and mesh of truck
-
-
     public class LevelManager : MonoBehaviour
     {
         #region Constant Keys
         public const string LEVEL = "level";
         public const string SCORE = "score";
-        public const string SELECTED_TRUCK = "selectedTruck";
+        public const string SELECTED_TRUCK_INDEX = "selectedTruckIndex";
+        public const string BACKPACK_CAPACITY = "backpackCapacity";
+        public const string TRUCK_UPGRADE_COST = "truckUpgradeCost";
+        public const string CARRY_UPGRADE_COST = "carryUpgradeCost";
         #endregion
 
         [SerializeField] private GameObject[] levelArray;
@@ -41,10 +40,32 @@ namespace Cargo.Managers
             {
                 PlayerPrefs.SetInt(SCORE, 0);
             }
-            if (!PlayerPrefs.HasKey(SELECTED_TRUCK))
+            if (!PlayerPrefs.HasKey(SELECTED_TRUCK_INDEX))
             {
-                PlayerPrefs.SetInt(SELECTED_TRUCK, 0); 
+                PlayerPrefs.SetInt(SELECTED_TRUCK_INDEX, 0); 
             }
+            if (!PlayerPrefs.HasKey(BACKPACK_CAPACITY))
+            {
+                PlayerPrefs.SetInt(BACKPACK_CAPACITY, 2);
+            }
+            if (!PlayerPrefs.HasKey(TRUCK_UPGRADE_COST))
+            {
+                PlayerPrefs.SetInt(TRUCK_UPGRADE_COST, 200);
+            }
+            if (!PlayerPrefs.HasKey(CARRY_UPGRADE_COST))
+            {
+                PlayerPrefs.SetInt(CARRY_UPGRADE_COST, 2000);
+            }
+        }
+        public void ResetKeys()
+        {
+            PlayerPrefs.SetInt(LEVEL, 1);
+            PlayerPrefs.SetInt(SCORE, 0);
+            PlayerPrefs.SetInt(SELECTED_TRUCK_INDEX, 0);
+            PlayerPrefs.SetInt(BACKPACK_CAPACITY, 2);
+            PlayerPrefs.SetInt(CARRY_UPGRADE_COST, 200);
+            PlayerPrefs.SetInt(TRUCK_UPGRADE_COST, 2000);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
         }
 
         #region Open Level
@@ -81,7 +102,7 @@ namespace Cargo.Managers
 
         public void StartLevel()
         {
-            GameManager.instance.ChangeState(GameState.StackState);
+            GameManager.instance.ChangeState(GameState.StackState); // called from start game button
         }
         public void NextLevel()
         {
@@ -104,19 +125,20 @@ namespace Cargo.Managers
                 Destroy(ActiveTruck);
                 ActiveTruck = null;
             } 
-            ActiveTruck = Instantiate(TruckArray[PlayerPrefs.GetInt(SELECTED_TRUCK)], 
-                ActiveLevel.TruckPath.path.GetPointAtDistance(0, EndOfPathInstruction.Stop), 
-                Quaternion.identity);
-        }
-        public void SelectTruck0()
-        {
-            PlayerPrefs.SetInt(SELECTED_TRUCK, 0);
-        }
-        public void SelectTruck1()
-        {
-            PlayerPrefs.SetInt(SELECTED_TRUCK, 1);
-        }
+            if(PlayerPrefs.GetInt(SELECTED_TRUCK_INDEX) < TruckArray.Length)
+            {
+                ActiveTruck = Instantiate(TruckArray[PlayerPrefs.GetInt(SELECTED_TRUCK_INDEX)],
+    ActiveLevel.TruckPath.path.GetPointAtDistance(0, EndOfPathInstruction.Stop),
+    Quaternion.identity);
+            }
+            else
+            {
+                ActiveTruck = Instantiate(TruckArray[TruckArray.Length-1], //if selected trunk index is greater than the length of array; select the last truck
+ActiveLevel.TruckPath.path.GetPointAtDistance(0, EndOfPathInstruction.Stop),
+Quaternion.identity);
+            }
 
+        }
         #region State Methods
         public void GameAwaitingStart()
         {

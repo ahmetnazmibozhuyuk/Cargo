@@ -24,6 +24,12 @@ namespace Cargo.Control
             _rotationOffsetZ = 90;
             _currentSpeedMultipier = 0;
             _truckCargoBed.InitializePositions();
+
+        }
+        protected override void FixedUpdate()
+        {
+            if (GameManager.instance.CurrentState == GameState.DriveState || GameManager.instance.CurrentState == GameState.DeliverState)
+                base.FixedUpdate();
         }
         private void Update()
         {
