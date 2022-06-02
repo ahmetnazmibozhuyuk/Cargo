@@ -76,7 +76,6 @@ namespace Cargo.Interactable
         {
             Debug.Log("An object is given to the generator.");
         }
-
         public GameObject GiveObject()
         {
             if (_counter <= 0)

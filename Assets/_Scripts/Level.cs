@@ -5,8 +5,6 @@ namespace Cargo
 {
     public class Level : MonoBehaviour
     {
-
         public PathCreator TruckPath;
-
     }
 }

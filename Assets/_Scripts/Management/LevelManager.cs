@@ -19,7 +19,6 @@ namespace Cargo.Managers
 
         [SerializeField] private int singleCargoPoint = 10;
 
-
         public Level ActiveLevel { get; private set; }
 
         public GameObject ActiveTruck { get; private set; }
@@ -50,11 +49,11 @@ namespace Cargo.Managers
             }
             if (!PlayerPrefs.HasKey(TRUCK_UPGRADE_COST))
             {
-                PlayerPrefs.SetInt(TRUCK_UPGRADE_COST, 100);
+                PlayerPrefs.SetInt(TRUCK_UPGRADE_COST, 80);
             }
             if (!PlayerPrefs.HasKey(CARRY_UPGRADE_COST))
             {
-                PlayerPrefs.SetInt(CARRY_UPGRADE_COST, 300);
+                PlayerPrefs.SetInt(CARRY_UPGRADE_COST, 200);
             }
         }
         public void ResetKeys()
@@ -63,8 +62,8 @@ namespace Cargo.Managers
             PlayerPrefs.SetInt(SCORE, 0);
             PlayerPrefs.SetInt(SELECTED_TRUCK_INDEX, 0);
             PlayerPrefs.SetInt(BACKPACK_CAPACITY, 2);
-            PlayerPrefs.SetInt(CARRY_UPGRADE_COST, 100);
-            PlayerPrefs.SetInt(TRUCK_UPGRADE_COST, 300);
+            PlayerPrefs.SetInt(CARRY_UPGRADE_COST, 80);
+            PlayerPrefs.SetInt(TRUCK_UPGRADE_COST, 200);
             UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
         }
 
@@ -140,31 +139,31 @@ Quaternion.identity);
 
         }
         #region State Methods
-        public void GameAwaitingStart()
-        {
+        //public void GameAwaitingStart()
+        //{
 
-        }
+        //}
         public void StackState()
         {
             OpenLevel();
             SpawnTruck();
         }
-        public void DriveState()
-        {
+        //public void DriveState()
+        //{
 
-        }
-        public void DeliverState()
-        {
+        //}
+        //public void DeliverState()
+        //{
 
-        }
-        public void GameWon()
-        {
+        //}
+        //public void GameWon()
+        //{
 
-        }
-        public void GameLost()
-        {
+        //}
+        //public void GameLost()
+        //{
 
-        }
+        //}
         #endregion
     }
 }

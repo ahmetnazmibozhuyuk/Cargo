@@ -1,7 +1,5 @@
 using UnityEngine;
 using PathCreation;
-using Cargo.Managers;
-
 
 namespace Cargo.Control
 {
@@ -11,14 +9,13 @@ namespace Cargo.Control
 
         protected float _speed = 1f;
         protected float _currentSpeedMultipier = 1f;
-
         protected float _rotationOffsetX;
         protected float _rotationOffsetY;
         protected float _rotationOffsetZ;
 
-        private float _distanceTravelled;
-
         protected EndOfPathInstruction _endOfPathInstruction;
+
+        private float _distanceTravelled;
 
         protected virtual void FixedUpdate()
         {

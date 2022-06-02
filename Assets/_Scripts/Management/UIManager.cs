@@ -11,6 +11,7 @@ namespace Cargo.Managers
         [SerializeField] private TextMeshProUGUI carryUpgradeCostText;
         [SerializeField] private TextMeshProUGUI truckUpgradeCostText;
         [SerializeField] private TextMeshProUGUI capacityText;
+        [SerializeField] private TextMeshProUGUI levelText;
 
         [SerializeField] private GameObject inGamePanel;
         [SerializeField] private GameObject gameWonPanel;
@@ -22,7 +23,6 @@ namespace Cargo.Managers
 
         [SerializeField] private int truckUpgradeCostScale = 4000;
         [SerializeField] private int carryUpgradeCostScale = 500;
-
 
         private void Start()
         {
@@ -42,20 +42,21 @@ namespace Cargo.Managers
 
             ShopButtonActivation();
             shopPanel.SetActive(true);
+            levelText.SetText("Level: "+PlayerPrefs.GetInt(LevelManager.LEVEL).ToString());
         }
         public void StackState()
         {
             shopPanel.SetActive(false);
             inGamePanel.SetActive(true);
         }
-        public void DriveState()
-        {
+        //public void DriveState()
+        //{
 
-        }
-        public void DeliverState()
-        {
+        //}
+        //public void DeliverState()
+        //{
 
-        }
+        //}
         public void GameWon()
         {
             inGamePanel.SetActive(false);
@@ -78,13 +79,11 @@ namespace Cargo.Managers
         public void UpdateCapacity(string capacity)
         {
             capacityText.SetText(capacity);
-
         }
 
         #region Upgrade System
         public void UpgradeTruck()
         {
-            
             PlayerPrefs.SetInt(LevelManager.SELECTED_TRUCK_INDEX, PlayerPrefs.GetInt(LevelManager.SELECTED_TRUCK_INDEX) + 1);
 
             PlayerPrefs.SetInt(LevelManager.SCORE, PlayerPrefs.GetInt(LevelManager.SCORE) - PlayerPrefs.GetInt(LevelManager.TRUCK_UPGRADE_COST));

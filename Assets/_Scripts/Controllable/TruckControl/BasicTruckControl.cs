@@ -9,12 +9,9 @@ namespace Cargo.Control
     [RequireComponent(typeof(Stockpile))]
     public class BasicTruckControl : TrackFollowerBase
     {
-
         [SerializeField] private TruckData truckData;
 
         private Stockpile _truckCargoBed;
-
-        
 
         private void Awake()
         {
@@ -67,7 +64,6 @@ namespace Cargo.Control
         {
             for(int i = 0; i < Random.Range(3,6); i++)
             {
-                
                 GameObject objectToLose = _truckCargoBed.GiveObject();
                 if (objectToLose == null) return;
                 objectToLose.transform.DOMove(new Vector3(
@@ -83,6 +79,5 @@ namespace Cargo.Control
             }
             _currentSpeedMultipier = -0.5f;
         }
-        
     }
 }

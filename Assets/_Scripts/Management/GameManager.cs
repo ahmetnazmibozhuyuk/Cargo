@@ -53,7 +53,7 @@ namespace Cargo.Managers
                     DriveState();
                     break;
                 case GameState.DeliverState:
-                    DeliverState();
+                    //DeliverState();
                     break;
                 case GameState.GameWon:
                     GameWonState();
@@ -76,14 +76,12 @@ namespace Cargo.Managers
         }
         private void DriveState()
         {
-
             CamFollowTarget = MainTruck.transform;
-            _uiManager.DriveState();
         }
-        private void DeliverState()
-        {
-            _uiManager.DeliverState();
-        }
+        //private void DeliverState()
+        //{
+
+        //}
 
         private void GameWonState()
         {

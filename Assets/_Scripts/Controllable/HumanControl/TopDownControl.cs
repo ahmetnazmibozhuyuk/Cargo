@@ -30,7 +30,7 @@ namespace Cargo.Control
             {
                 _animator.SetFloat("MovementSpeed", 0);
                 _animator.SetBool("WorkIsFinised", true);
-                Destroy(this);                              // Remove the control class once the player changes state
+                Destroy(this);                              // Remove the control class once the game changes state
                 return;
             }
             SetControl();
