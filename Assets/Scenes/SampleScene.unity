@@ -1065,7 +1065,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eb05d9a85de25d4facbeca01680e20e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraPositionDelay: 5
+  cameraPositionDelay: 8
 --- !u!4 &524849323
 Transform:
   m_ObjectHideFlags: 0
@@ -1766,7 +1766,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 180
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -1793,7 +1793,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
-  m_LocalPosition: {x: 0, y: 22.07, z: -23.59}
+  m_LocalPosition: {x: 0, y: 20, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2981,9 +2981,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelArray:
   - {fileID: 9033586234392802455, guid: 1fe873395f400b343b9f8bdcc5a46007, type: 3}
-  - {fileID: 9033586234392802455, guid: 56044bf791bb377419a0715e9dec9a31, type: 3}
-  - {fileID: 9033586234392802455, guid: 5aba8f64187940647a4044bd3f6fb41e, type: 3}
-  - {fileID: 9033586234392802455, guid: cab48b621c521f5438b7567c599e5b22, type: 3}
   TruckArray:
   - {fileID: 7107668069448438667, guid: b4fcdc5c48f71bd41b65811e8ac8864e, type: 3}
   - {fileID: 7107668069448438667, guid: 07ca84db0e0e4d64696f2081c8c8c7e5, type: 3}

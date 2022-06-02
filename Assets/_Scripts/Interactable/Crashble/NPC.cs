@@ -19,7 +19,7 @@ namespace Cargo.Control
         {
             _rigidbody = GetComponent<Rigidbody>();
             _animator = GetComponent<Animator>();
-            _speed = speed;
+            _speed = speed+Random.Range(-1.5f,1.5f);
             _rotationOffsetZ = 90;
             _endOfPathInstruction = PathCreation.EndOfPathInstruction.Loop;
         }

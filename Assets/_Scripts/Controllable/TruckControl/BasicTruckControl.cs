@@ -9,9 +9,12 @@ namespace Cargo.Control
     [RequireComponent(typeof(Stockpile))]
     public class BasicTruckControl : TrackFollowerBase
     {
+
         [SerializeField] private TruckData truckData;
 
         private Stockpile _truckCargoBed;
+
+        
 
         private void Awake()
         {
