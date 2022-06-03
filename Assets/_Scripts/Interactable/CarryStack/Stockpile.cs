@@ -13,20 +13,18 @@ namespace Cargo.Interactable
 
         [SerializeField] private Transform stockTransform;
 
-        private List<ObjectData> _objectDataList = new List<ObjectData>();
-
-        private float _localX = 0, _localY = 0, _localZ = 1;
-
         [SerializeField] private int maxX = 4, maxZ = 2;
 
         private int _counter;
 
         private bool _inTheZone;
 
+        private List<ObjectData> _objectDataList = new List<ObjectData>();
+
+        private float _localX = 0, _localY = 0, _localZ = 1;
+
         private readonly float _gatherRate = 0.05f;
-
         private readonly float _cargoJumpPower = 4f;
-
         private readonly float _objectTransferSpeed = 0.5f;
         private void Awake()
         {
@@ -94,7 +92,7 @@ namespace Cargo.Interactable
                 givenObj.transform.DOJump(_objectDataList[_counter].ObjectPosition, _cargoJumpPower, 1, _objectTransferSpeed);
                 givenObj.transform.SetParent(transform);
                 _counter++;
-                GameManager.instance.UpdateCapacity(_counter + " / " + GameManager.instance.CargoCapacity);
+                GameManager.instance.UpdateCapacityCounter(_counter + " / " + GameManager.instance.CargoCapacity);
                 if (_counter >= GameManager.instance.CargoCapacity)
                 {
                     FullCapacity = true;
@@ -122,7 +120,7 @@ namespace Cargo.Interactable
                 return null;
             }
             _counter--;
-            GameManager.instance.UpdateCapacity(_counter + " / " + GameManager.instance.CargoCapacity);
+            GameManager.instance.UpdateCapacityCounter(_counter + " / " + GameManager.instance.CargoCapacity);
             GameObject temp = _objectDataList[_counter].ObjectHeld;
             _objectDataList[_counter].ObjectHeld = null;
             return temp;

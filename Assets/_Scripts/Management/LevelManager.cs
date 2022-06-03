@@ -13,24 +13,25 @@ namespace Cargo.Managers
         public const string TRUCK_UPGRADE_COST = "truckUpgradeCost";
         public const string CARRY_UPGRADE_COST = "carryUpgradeCost";
         #endregion
+        public Level ActiveLevel { get; private set; }
+        public GameObject ActiveTruck { get; private set; }
 
         [SerializeField] private GameObject[] levelArray;
         [SerializeField] private GameObject[] TruckArray;
 
         [SerializeField] private int singleCargoPoint = 10;
 
-        public Level ActiveLevel { get; private set; }
+        [SerializeField] private int initialCarryCapacity = 2;
+        [SerializeField] private int firstCarryUpgradeCost = 80;
+        [SerializeField] private int firstTruckUpgradeCost = 200;
 
-        public GameObject ActiveTruck { get; private set; }
-        
-
+        private int _previousRandomLevelIndex;
         private void Awake()
         {
             InitializeKeys();
         }
         private void InitializeKeys()
         {
-
             if (!PlayerPrefs.HasKey(LEVEL))
             {
                 PlayerPrefs.SetInt(LEVEL, 1);
@@ -45,26 +46,27 @@ namespace Cargo.Managers
             }
             if (!PlayerPrefs.HasKey(BACKPACK_CAPACITY))
             {
-                PlayerPrefs.SetInt(BACKPACK_CAPACITY, 2);
-            }
-            if (!PlayerPrefs.HasKey(TRUCK_UPGRADE_COST))
-            {
-                PlayerPrefs.SetInt(TRUCK_UPGRADE_COST, 80);
+                PlayerPrefs.SetInt(BACKPACK_CAPACITY, initialCarryCapacity);
             }
             if (!PlayerPrefs.HasKey(CARRY_UPGRADE_COST))
             {
-                PlayerPrefs.SetInt(CARRY_UPGRADE_COST, 200);
+                PlayerPrefs.SetInt(CARRY_UPGRADE_COST, firstCarryUpgradeCost);
+            }
+            if (!PlayerPrefs.HasKey(TRUCK_UPGRADE_COST))
+            {
+                PlayerPrefs.SetInt(TRUCK_UPGRADE_COST, firstTruckUpgradeCost);
             }
         }
-        public void ResetKeys()
+        public void ResetKeys() // The method called from ResetAllKeys button. 
         {
             PlayerPrefs.SetInt(LEVEL, 1);
             PlayerPrefs.SetInt(SCORE, 0);
             PlayerPrefs.SetInt(SELECTED_TRUCK_INDEX, 0);
-            PlayerPrefs.SetInt(BACKPACK_CAPACITY, 2);
-            PlayerPrefs.SetInt(CARRY_UPGRADE_COST, 80);
-            PlayerPrefs.SetInt(TRUCK_UPGRADE_COST, 200);
+            PlayerPrefs.SetInt(BACKPACK_CAPACITY, initialCarryCapacity);
+            PlayerPrefs.SetInt(CARRY_UPGRADE_COST, firstCarryUpgradeCost);
+            PlayerPrefs.SetInt(TRUCK_UPGRADE_COST, firstTruckUpgradeCost);
             UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+            // Only instance of restarting the scene in the game. It is for testing and this method will not be in the build.
         }
 
         #region Open Level
@@ -82,7 +84,21 @@ namespace Cargo.Managers
         private void OpenRandomLevel()
         {
             RemoveLevel();
-            ActiveLevel = Instantiate(levelArray[Random.Range(0, levelArray.Length)], Vector3.zero, Quaternion.identity).GetComponent<Level>();
+            // To prevent the same random level spawning twice.
+            int randomLevelIndex = Random.Range(0, levelArray.Length);
+            if(_previousRandomLevelIndex == randomLevelIndex)
+            {
+                if(randomLevelIndex >= levelArray.Length - 1)
+                {
+                    randomLevelIndex = 0;
+                }
+                else
+                {
+                    randomLevelIndex++;
+                }
+            }
+            _previousRandomLevelIndex = randomLevelIndex;
+            ActiveLevel = Instantiate(levelArray[randomLevelIndex], Vector3.zero, Quaternion.identity).GetComponent<Level>();
         }
         private void OpenCurrentLevel()
         {
@@ -99,6 +115,7 @@ namespace Cargo.Managers
         }
         #endregion
 
+        #region Change Level
         public void StartLevel()
         {
             GameManager.instance.ChangeState(GameState.StackState); // called from start game button
@@ -112,6 +129,8 @@ namespace Cargo.Managers
         {
             GameManager.instance.ChangeState(GameState.GameAwaitingStart);
         }
+        #endregion
+
         public void AddPoint()
         {
             PlayerPrefs.SetInt(SCORE, PlayerPrefs.GetInt(SCORE) + singleCargoPoint);
@@ -138,6 +157,7 @@ Quaternion.identity);
             }
 
         }
+
         #region State Methods
         //public void GameAwaitingStart()
         //{

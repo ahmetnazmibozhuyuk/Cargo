@@ -28,12 +28,16 @@ namespace Cargo.Control
         {
             if (GameManager.instance.CurrentState == GameState.DriveState)
             {
-                _animator.SetFloat("MovementSpeed", 0);
-                _animator.SetBool("WorkIsFinised", true);
-                Destroy(this);                              // Remove the control class once the game changes state
+                StackStateFinished();
                 return;
             }
             SetControl();
+        }
+        private void StackStateFinished()
+        {
+            _animator.SetFloat("MovementSpeed", 0);
+            _animator.SetBool("WorkIsFinised", true);
+            Destroy(this);                              // Remove the control class once the game changes state
         }
         private void FixedUpdate()
         {

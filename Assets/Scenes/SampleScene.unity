@@ -2444,7 +2444,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Level: 0'
+  m_text: 'Level: 1'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d0e9986110b21404fab0b4e3ee5c7e0d, type: 2}
   m_sharedMaterial: {fileID: 2848629081125017810, guid: d0e9986110b21404fab0b4e3ee5c7e0d, type: 2}
@@ -3850,6 +3850,9 @@ MonoBehaviour:
   - {fileID: 7107668069448438667, guid: fd937209ddd0bc648b3434f70c4fe34d, type: 3}
   - {fileID: 7107668069448438667, guid: 38ae7a7b18bac744f9a9fbc6a259ede6, type: 3}
   singleCargoPoint: 20
+  initialCarryCapacity: 2
+  firstCarryUpgradeCost: 80
+  firstTruckUpgradeCost: 200
 --- !u!114 &1812025182
 MonoBehaviour:
   m_ObjectHideFlags: 0

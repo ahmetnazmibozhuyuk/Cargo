@@ -6,7 +6,7 @@ using DG.Tweening;
 
 namespace Cargo.Interactable
 {
-    public class Backpack : MonoBehaviour, IInteractable
+    public class Backpack : MonoBehaviour, IInteractable // The class that top down human character carries.
     {
         public bool FullCapacity { get; set; }
         public InteractableType Type { get; set; }
@@ -21,11 +21,10 @@ namespace Cargo.Interactable
         private Animator _animator;
 
         private readonly float gatherRate = 0.05f;
+        private readonly float _cargoJumpPower = 4f;
 
         private float _localY;
         private float _objectTransferSpeed = 0.2f;
-
-        private readonly float _cargoJumpPower = 4f;
 
         private bool _inTheZone;
 
@@ -157,6 +156,7 @@ namespace Cargo
     {
         public Vector3 ObjectPosition;
         public GameObject ObjectHeld;
+        #region Constructors
         public ObjectData(Vector3 pos, GameObject obj)
         {
             ObjectPosition = pos;
@@ -167,6 +167,7 @@ namespace Cargo
             ObjectPosition = pos;
             ObjectHeld = null;
         }
+        #endregion
     }
     public interface IInteractable
     {

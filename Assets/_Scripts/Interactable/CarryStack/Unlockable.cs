@@ -11,8 +11,8 @@ namespace Cargo.Interactable
         public InteractableType Type { get; set; }
 
         [SerializeField] private Transform objectMovePoint;
-        [SerializeField] private int unlockAmount;
 
+        [SerializeField] private int unlockAmount;
 
         private readonly float _cargoJumpPower = 7f;
         private void Awake()

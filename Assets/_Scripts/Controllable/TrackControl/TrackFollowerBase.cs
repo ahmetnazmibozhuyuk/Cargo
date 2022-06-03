@@ -19,7 +19,7 @@ namespace Cargo.Control
 
         protected virtual void FixedUpdate()
         {
-                SetPositionRotation();
+            SetPositionRotation();
         }
         private void SetPositionRotation()
         {
@@ -32,9 +32,9 @@ namespace Cargo.Control
         }
         private Vector3 SetRotationEuler()
         {
-            return new Vector3(TrackPathCreator.path.GetRotationAtDistanceAsEuler(_distanceTravelled, _endOfPathInstruction).x+ _rotationOffsetX,
-                TrackPathCreator.path.GetRotationAtDistanceAsEuler(_distanceTravelled, _endOfPathInstruction).y+ _rotationOffsetY,
-                TrackPathCreator.path.GetRotationAtDistanceAsEuler(_distanceTravelled, _endOfPathInstruction).z+ _rotationOffsetZ);
+            return new Vector3(TrackPathCreator.path.GetRotationAtDistanceAsEuler(_distanceTravelled, _endOfPathInstruction).x + _rotationOffsetX,
+                TrackPathCreator.path.GetRotationAtDistanceAsEuler(_distanceTravelled, _endOfPathInstruction).y + _rotationOffsetY,
+                TrackPathCreator.path.GetRotationAtDistanceAsEuler(_distanceTravelled, _endOfPathInstruction).z + _rotationOffsetZ);
         }
     }
 }

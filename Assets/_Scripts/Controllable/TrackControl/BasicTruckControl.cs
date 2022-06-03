@@ -11,6 +11,13 @@ namespace Cargo.Control
     {
         [SerializeField] private TruckData truckData;
 
+        [SerializeField] private int minHitLoss = 3;
+        [SerializeField] private int maxHitLoss = 6;
+        [SerializeField] private int minLossScatter = 3;
+        [SerializeField] private int maxLossScatter = 10;
+
+        [SerializeField] private float lossDuration = 0.6f;
+
         private Stockpile _truckCargoBed;
 
         private void Awake()
@@ -19,17 +26,20 @@ namespace Cargo.Control
         }
         private void Start()
         {
+            Initialze();
+        }
+        private void Initialze()
+        {
             GameManager.instance.AssignTruck(gameObject, truckData.TruckCapacity);
             _speed = truckData.Speed;
             _rotationOffsetZ = 90;
             _currentSpeedMultipier = 0;
             _truckCargoBed.InitializePositions();
-
         }
         protected override void FixedUpdate()
         {
             if (GameManager.instance.CurrentState == GameState.DriveState || GameManager.instance.CurrentState == GameState.DeliverState)
-                base.FixedUpdate();
+                base.FixedUpdate();             // the truck is only active in spesific game states
         }
         private void Update()
         {
@@ -60,24 +70,25 @@ namespace Cargo.Control
                 _currentSpeedMultipier = Mathf.Lerp(_currentSpeedMultipier, 0, truckData.DecelerationRate);
             }
         }
-        public void HitSomething()
+        public void HitSomething() // is triggered from the NPC class
         {
-            for(int i = 0; i < Random.Range(3,6); i++)
+            for(int i = 0; i < Random.Range(minHitLoss,maxHitLoss); i++)
             {
                 GameObject objectToLose = _truckCargoBed.GiveObject();
                 if (objectToLose == null) return;
                 objectToLose.transform.DOMove(new Vector3(
-                    objectToLose.transform.position.x + Random.Range(2, 10),
-                    objectToLose.transform.position.y + Random.Range(2,10),
-                    objectToLose.transform.position.z+ Random.Range(2, 10)), 0.4f);
+                    objectToLose.transform.position.x + Random.Range(minLossScatter, maxLossScatter),
+                    objectToLose.transform.position.y + Random.Range(minLossScatter, maxLossScatter),
+                    objectToLose.transform.position.z+ Random.Range(minLossScatter, maxLossScatter)), lossDuration);
 
-                objectToLose.transform.DOScale(0, 0.4f).OnComplete(() =>
+                objectToLose.transform.DOScale(0, lossDuration).OnComplete(() =>
                 {
-                    ObjectPool.Despawn(objectToLose);
+                    ObjectPool.Despawn(objectToLose); // send back the lost object back into the pool in its initial scale
                 }
                 );
             }
-            _currentSpeedMultipier = -0.5f;
+            _currentSpeedMultipier = -0.5f; // hit causes the truck to stop and go back momentarily; regains its speed from update even when there are no inputs
+                                            // without input _currentSpeedMultiplier quickly goes back to zero so the truck won't keep moving backwards
         }
     }
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using Cargo.Managers;
 
-namespace Cargo
+namespace Cargo.Interactable
 {
     public class EndGoal : MonoBehaviour
     {

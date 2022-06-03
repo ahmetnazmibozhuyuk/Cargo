@@ -28,11 +28,11 @@ namespace Cargo.Managers
         {
             if(PlayerPrefs.GetInt(LevelManager.LEVEL) > 1)
             {
-                ChangeState(GameState.GameAwaitingStart);
+                ChangeState(GameState.GameAwaitingStart); 
             }
             else
             {
-                ChangeState(GameState.StackState);
+                ChangeState(GameState.StackState); // The first level automatically starts without asking if the player wants to upgrade.
             }
         }
         #region Game States
@@ -99,8 +99,7 @@ namespace Cargo.Managers
             MainTruck = truckObject.GetComponent<BasicTruckControl>();
             CargoCapacity = capacity;
             MainTruck.TrackPathCreator = _levelManager.ActiveLevel.TruckPath;
-            UpdateCapacity("0"+ " / " + capacity);
-
+            UpdateCapacityCounter("0"+ " / " + capacity);
         }
         public void AssignPlayer(GameObject player)
         {
@@ -112,9 +111,9 @@ namespace Cargo.Managers
             _levelManager.AddPoint();
             _uiManager.UpdateScore();
         }
-        public void UpdateCapacity(string capacity)
+        public void UpdateCapacityCounter(string capacity)
         {
-            _uiManager.UpdateCapacity(capacity);
+            _uiManager.UpdateCapacityCounter(capacity);
         }
     }
     public enum GameState

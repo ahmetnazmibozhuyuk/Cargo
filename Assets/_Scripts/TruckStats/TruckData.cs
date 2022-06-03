@@ -12,5 +12,7 @@ namespace Cargo.Control
         public float AccelerationRate;
         public float DecelerationRate;
         public int TruckCapacity;
+        //public int MinLossOnCollision;
+        //public int MaxLossOnCollision;
     }
 }

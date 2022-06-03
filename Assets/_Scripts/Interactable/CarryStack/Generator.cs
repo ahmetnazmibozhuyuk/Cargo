@@ -53,7 +53,7 @@ namespace Cargo.Interactable
                 _localX++;
             }
         }
-        private IEnumerator SpawnObject()
+        private IEnumerator SpawnObject() // might want to consider using a simple timer on update rather than an IEnumerator
         {
             if (_counter < maxCapacity)
             {

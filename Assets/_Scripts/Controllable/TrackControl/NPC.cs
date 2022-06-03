@@ -17,16 +17,21 @@ namespace Cargo.Control
         private Animator _animator;
         private void Awake()
         {
+            Initialize();
+        }
+        private void Initialize()
+        {
             _rigidbody = GetComponent<Rigidbody>();
             _animator = GetComponent<Animator>();
-            _speed = speed+Random.Range(-1.5f,1.5f);
+            _speed = speed + Random.Range(-1.5f, 1.5f);
             _rotationOffsetZ = 90;
             _endOfPathInstruction = PathCreation.EndOfPathInstruction.Loop;
         }
+        #region Collision Related Methods
         private void OnCollisionEnter(Collision collision)
         {
             if (!collision.gameObject.CompareTag("Truck")) return;
-            GameManager.instance.MainTruck.HitSomething();
+            GameManager.instance.MainTruck.HitSomething();          //trigger the truck hit method
             GetHit(collision.transform.position);
         }
         private void GetHit(Vector3 hittingObjectPosition)
@@ -43,5 +48,6 @@ namespace Cargo.Control
             Vector3 direction = (hittingObjectPosition - transform.position).normalized;
             return new Vector3(-direction.x * hitForceX, hitForceY, -direction.z * hitForceZ);
         }
+        #endregion
     }
 }
